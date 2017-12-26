@@ -16,9 +16,9 @@ import { TelecomService } from './telecomservice';
 
 export class AppComponent {
   title = 'telecom-platform';
-  private productsObservable: Observable<Product[]>;
-  private operatorsObservable: Observable<Operator[]>;
-  private telecomServiceObservable: Observable<TelecomService[]>;
+  productsObservable: Observable<Product[]>;
+  operatorsObservable: Observable<Operator[]>;
+  telecomServiceObservable: Observable<TelecomService[]>;
 
   constructor(private dataService: DataService) {
     this.productsObservable = this.dataService.get_products();
