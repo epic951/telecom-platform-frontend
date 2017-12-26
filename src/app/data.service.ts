@@ -6,6 +6,7 @@ import { Operator } from './operator';
 import { TelecomService } from './telecomservice';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class DataService {
@@ -29,7 +30,7 @@ export class DataService {
     }
 
     get_operators(): Observable<Operator[]> {
-        return this.httpClient.get<Operator[]>(this.baseUrl + 'operators', { headers: this.headers });
+        return this.httpClient.get<Operator[]>(environment.backend + 'getoperators', { headers: this.headers });
     }
 
 }
