@@ -1,11 +1,11 @@
 thead {
-    color: burlywood;
-    text-align: left;
-    font-weight: bold;
-}
-div.panel-heading {
-   font-size: x-large;
+    color: #337AB7;
 }
 tr{
     text-align: left;
+}
+td{
+    word-wrap: break-word;
+    text-justify: distribute;
+    width: 20%;
 }

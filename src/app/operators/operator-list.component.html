@@ -26,7 +26,7 @@
                             </th>
                             <th>Operator ID</th>
                             <th>Operator Name</th>
-                            <th>operator Country</th>
+                            <th>Operator Country</th>
                             <th>Rating</th>
                         </tr>
                     </thead>
@@ -36,8 +36,8 @@
                                 <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                             </td>
                             <td> {{operator.operatorId}}</td>
-                            <td>{{operator.operatorName}}</td>
-                            <td>{{operator.operatorCountry}}</td>
+                            <td> {{operator.operatorName}}</td>
+                            <td> {{operator.operatorCountry}}</td>
                             <ng-template #empty> No Data Yet </ng-template>
                         </tr>
                         <!-- <tr *ngFor='let product of productsObservable'>
@@ -59,7 +59,7 @@
                         </tr> -->
                     </tbody>
                 </table>
-                <ng-template #empty> No Data Yet </ng-template>
+                <ng-template #empty> No Oprator Data Yet </ng-template>
             </div>
         </div>
     </div>
