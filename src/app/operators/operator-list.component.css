@@ -1,0 +1,11 @@
+thead {
+    color: burlywood;
+    text-align: left;
+    font-weight: bold;
+}
+div.panel-heading {
+   font-size: x-large;
+}
+tr{
+    text-align: left;
+}

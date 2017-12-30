@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+/* li {
+    font-size: large;
+} */
+
+/* div.panel-heading {
+   font-size: x-large;
+} */
+.test-endpoints{
+    position: absolute;
+    top: 0;
+    left: 0;
+}

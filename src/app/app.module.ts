@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { DataService } from './data.service';
 import { AppComponent } from './app.component';
-
+import { ProductListComponent } from './products/product-list.component';
+import { OperatorListComponent } from './operators/operator-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, ProductListComponent, OperatorListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Product } from './product';
 import { DataService } from './data.service';
 import 'rxjs/add/operator/map';
-import { Operator } from './operator';
 import { TelecomService } from './telecomservice';
 
 
@@ -15,19 +13,16 @@ import { TelecomService } from './telecomservice';
 })
 
 export class AppComponent {
-  title = 'telecom-platform';
-  productsObservable: Observable<Product[]>;
-  operatorsObservable: Observable<Operator[]>;
-  telecomServiceObservable: Observable<TelecomService[]>;
-  products: Product[];
+  pageTitle = 'telecom-platform ';
+  // operatorsObservable: Observable<Operator[]>;
+  // telecomServiceObservable: Observable<TelecomService[]>;
+  // products: Product[];
 
   constructor(private dataService: DataService) {
-    this.productsObservable = this.dataService.get_products();
-    this.operatorsObservable = this.dataService.get_operators();
-    this.dataService.get_products().subscribe((res: Product[]) => {
-      console.log(res);
-      this.products = res;
-    });
+    // this.dataService.get_products().subscribe((res: Product[]) => {
+    //   console.log(res);
+    //   this.products = res;
+    // });
   }
 
 }
