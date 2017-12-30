@@ -11,8 +11,8 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class DataService {
 
-    baseUrl = '/backend/get';
-    burl = 'https://telecom-platform.herokuapp.com/api/get';
+    baseUrl = 'https://telecom-platform.herokuapp.com/api/get';
+
     // Currently static credentials
     username = 'admin';
     password = 'admin';
@@ -27,11 +27,11 @@ export class DataService {
     }
 
     get_products(): Observable<Product[]> {
-        return this.httpClient.get<Product[]>(this.burl + 'products', { headers: this.headers });
+        return this.httpClient.get<Product[]>(this.baseUrl + 'products', { headers: this.headers });
     }
 
     get_operators(): Observable<Operator[]> {
-        return this.httpClient.get<Operator[]>(environment.backend + 'getoperators', { headers: this.headers });
+        return this.httpClient.get<Operator[]>(this.baseUrl + 'operators', { headers: this.headers });
     }
 
 }

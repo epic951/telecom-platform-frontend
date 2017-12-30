@@ -19,14 +19,15 @@ export class AppComponent {
   productsObservable: Observable<Product[]>;
   operatorsObservable: Observable<Operator[]>;
   telecomServiceObservable: Observable<TelecomService[]>;
+  products: Product[];
 
   constructor(private dataService: DataService) {
     this.productsObservable = this.dataService.get_products();
     this.operatorsObservable = this.dataService.get_operators();
-    // this.dataService.get_products().subscribe((res: Product[]) => {
-    //   console.log(res);
-    //   this.products = res;
-    // });
+    this.dataService.get_products().subscribe((res: Product[]) => {
+      console.log(res);
+      this.products = res;
+    });
   }
 
 }
