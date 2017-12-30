@@ -38,6 +38,7 @@
                             <td> {{operator.operatorId}}</td>
                             <td>{{operator.operatorName}}</td>
                             <td>{{operator.operatorCountry}}</td>
+                            <ng-template #empty> No Data Yet </ng-template>
                         </tr>
                         <!-- <tr *ngFor='let product of productsObservable'>
                           <td>
@@ -62,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf='errorMessage' class='alert alert-danger'>
+    <!-- <div *ngIf='errorMessage' class='alert alert-danger'>
         Error: {{ errorMessage }}
-    </div>
+    </div> -->
 </div>
