@@ -14,6 +14,7 @@ export class ProductListComponent {
     imageWidth = 100;
     imageMargin = 2;
     showImage = false;
+    listFilter = 'rad';
     productsObservable: Observable<Product[]>;
 
     constructor(private dataService: DataService) {

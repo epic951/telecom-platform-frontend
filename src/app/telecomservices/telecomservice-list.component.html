@@ -7,12 +7,12 @@
             <div class='row'>
                 <div class='col-md-2'>Filter by:</div>
                 <div class='col-md-4'>
-                    <input type='text' />
+                    <input type='text' [(ngModel)]='listFilter' />
                 </div>
             </div>
             <div class='row'>
                 <div class='col-md-6'>
-                    <h3>Filtered by: </h3>
+                    <h3>Filtered by: {{listFilter}}</h3>
                 </div>
             </div>
             <div class='table-responsive'>
@@ -40,13 +40,13 @@
                                 <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.width.px]='imageWidth'
                                     [style.margin.px]='imageMargin'>
                             </td>
-                            <td>{{telecomservice.telecomServiceId}}</td>
+                            <td>#{{telecomservice.telecomServiceId}}</td>
                             <td>{{telecomservice.telecomServiceName}}</td>
                             <td>{{telecomservice.telecomServiceType}}</td>
-                            <td>{{telecomservice.operatorId}}</td>
+                            <td>#{{telecomservice.operatorId}}</td>
                             <td>{{telecomservice.operatorName}}</td>
-                            <td>{{telecomservice.operatorServiceId}}</td>
-                            <td>{{telecomservice.operatorPackageId}}</td>
+                            <td>#{{telecomservice.operatorServiceId}}</td>
+                            <td>#{{telecomservice.operatorPackageId}}</td>
                             <td></td>
                         </tr>
                     </tbody>

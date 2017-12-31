@@ -14,6 +14,7 @@ export class TelecomServiceListComponent {
     imageWidth = 100;
     imageMargin = 2;
     showImage = false;
+    listFilter = 'mu';
     telecomservicesObservable: Observable<TelecomService[]>;
 
     constructor(private dataService: DataService) {
