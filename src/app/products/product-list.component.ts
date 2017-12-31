@@ -11,9 +11,16 @@ import { DataService } from '../data.service';
 
 export class ProductListComponent {
     pageTitle = 'Product List';
+    imageWidth = 50;
+    imageMargin = 2;
+    showImage = false;
     productsObservable: Observable<Product[]>;
 
     constructor(private dataService: DataService) {
         this.productsObservable = this.dataService.get_products();
+    }
+
+    toggleImage(): void {
+        this.showImage = !this.showImage;
     }
 }

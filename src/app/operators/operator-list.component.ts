@@ -11,6 +11,8 @@ import { DataService } from '../data.service';
 
 export class OperatorListComponent {
     pageTitle = 'Operator List';
+    imageWidth = 50;
+    imageMargin = 2;
     operatorsObservable: Observable<Operator[]>;
 
     constructor(private dataService: DataService) {

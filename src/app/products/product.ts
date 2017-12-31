@@ -4,6 +4,7 @@ export class Product {
     productDescription: string;
     minPrice: number;
     maxPrice: number;
+    imageUrl: string;
     constructor() {
     }
 }
