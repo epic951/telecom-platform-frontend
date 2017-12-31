@@ -21,7 +21,7 @@
                         <tr>
                             <th>
                                 <button class='btn btn-primary' (click)='toggleImage()'>
-                                    Show Image
+                                    {{showImage ? 'Hide' : 'Show'}} Image
                                 </button>
                             </th>
                             <th>Operator ID</th>
@@ -33,30 +33,13 @@
                     <tbody>
                         <tr *ngFor="let operator of operators">
                             <td>
-                                <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
+                                <img *ngIf='showImage' [src]='operator.imageUrl' [title]='operator.operatorName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                             </td>
-                            <td> {{operator.operatorId}}</td>
-                            <td> {{operator.operatorName}}</td>
-                            <td> {{operator.operatorCountry}}</td>
+                            <td>{{operator.operatorId}}</td>
+                            <td>{{operator.operatorName}}</td>
+                            <td>{{operator.operatorCountry}}</td>
                             <ng-template #empty> No Data Yet </ng-template>
                         </tr>
-                        <!-- <tr *ngFor='let product of productsObservable'>
-                          <td>
-                            <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
-                          </td>
-                          <td>
-                            <a [routerLink]="['/products', product.productId]">
-                              {{ product.productName }}
-                            </a>
-                          </td>
-                          <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
-                          <td>{{ product.releaseDate }}</td>
-                          <td>{{ product.price | currency:'USD':true:'1.2-2'}}</td>
-                          <td>
-                            <pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'>
-                            </pm-star>
-                          </td>
-                        </tr> -->
                     </tbody>
                 </table>
                 <ng-template #empty> No Oprator Data Yet </ng-template>

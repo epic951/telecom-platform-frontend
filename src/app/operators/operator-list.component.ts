@@ -11,11 +11,16 @@ import { DataService } from '../data.service';
 
 export class OperatorListComponent {
     pageTitle = 'Operator List';
-    imageWidth = 50;
+    imageWidth = 100;
     imageMargin = 2;
+    showImage = false;
     operatorsObservable: Observable<Operator[]>;
 
     constructor(private dataService: DataService) {
         this.operatorsObservable = this.dataService.get_operators();
+    }
+
+    toggleImage(): void {
+        this.showImage = !this.showImage;
     }
 }

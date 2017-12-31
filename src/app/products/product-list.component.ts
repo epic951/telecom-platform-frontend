@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 
 export class ProductListComponent {
     pageTitle = 'Product List';
-    imageWidth = 50;
+    imageWidth = 100;
     imageMargin = 2;
     showImage = false;
     productsObservable: Observable<Product[]>;
