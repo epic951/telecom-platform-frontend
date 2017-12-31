@@ -14,7 +14,7 @@ export class OperatorListComponent {
     imageWidth = 100;
     imageMargin = 2;
     showImage = false;
-    listFilter = 'eti';
+    listFilter = 'et';
     operatorsObservable: Observable<Operator[]>;
 
     constructor(private dataService: DataService) {

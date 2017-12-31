@@ -1,11 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-/* li {
-    font-size: large;
-} */
+@import url('https://fonts.googleapis.com/css?family=Bitter|Exo+2');
+html {
+    box-sizing: border-box;
+}
 
-/* div.panel-heading {
-   font-size: x-large;
-} */
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    line-height: 150%;
+    font-size: 1.8em;
+    font-weight: 600;
+    margin: 0;
+}
+div.panel-heading {
+    font-family: 'Bitter', serif;
+    font-size: x-large;
+}
 thead {
     color: #337AB7;
 }
