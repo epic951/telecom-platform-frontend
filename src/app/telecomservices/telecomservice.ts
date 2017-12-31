@@ -6,6 +6,7 @@ export class TelecomService {
     operatorName: string;
     operatorServiceId: number;
     operatorPackageId: number;
+    imageUrl: string;
     constructor() {
     }
 }

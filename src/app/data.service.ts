@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Product } from './products/product';
 import { Operator } from './operators/operator';
-import { TelecomService } from './telecomservice';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { TelecomService } from './telecomservices/telecomservice';
 
 @Injectable()
 export class DataService {
@@ -32,6 +32,10 @@ export class DataService {
 
     get_operators(): Observable<Operator[]> {
         return this.httpClient.get<Operator[]>(this.baseUrl + 'operators', { headers: this.headers });
+    }
+
+    get_telecomservices(): Observable<TelecomService[]> {
+        return this.httpClient.get<TelecomService[]>(this.baseUrl + 'services', { headers: this.headers });
     }
 
 }

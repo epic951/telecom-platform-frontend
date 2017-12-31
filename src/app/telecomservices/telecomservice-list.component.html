@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class='table-responsive'>
-                <table class='table' *ngIf="productsObservable | async as products else empty">
+                <table class='table' *ngIf="telecomservicesObservable | async as telecomservices else empty">
                     <thead>
                         <tr>
                             <th>
@@ -24,29 +24,34 @@
                                     {{showImage ? 'Hide' : 'Show'}} Image
                                 </button>
                             </th>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Product Description</th>
-                            <th>Min Price</th>
-                            <th>Max Price</th>
+                            <th>Telecom Service ID</th>
+                            <th>Telecom Service Name</th>
+                            <th>Telecom Service Type</th>
+                            <th>Operator Id</th>
+                            <th>Operator Name</th>
+                            <th>Operator Service Id</th>
+                            <th>Operator Package Id</th>
                             <th>Rating</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of products">
+                        <tr *ngFor="let telecomservice of telecomservices">
                             <td>
-                                <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
+                                <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.width.px]='imageWidth'
+                                    [style.margin.px]='imageMargin'>
                             </td>
-                            <td>{{product.productId}}</td>
-                            <td>{{product.productName}}</td>
-                            <td>{{product.productDescription}}</td>
-                            <td>{{product.minPrice}}</td>
-                            <td>{{product.maxPrice}}</td>
+                            <td>{{telecomservice.telecomServiceId}}</td>
+                            <td>{{telecomservice.telecomServiceName}}</td>
+                            <td>{{telecomservice.telecomServiceType}}</td>
+                            <td>{{telecomservice.operatorId}}</td>
+                            <td>{{telecomservice.operatorName}}</td>
+                            <td>{{telecomservice.operatorServiceId}}</td>
+                            <td>{{telecomservice.operatorPackageId}}</td>
                             <td></td>
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #empty> No Product Data Yet </ng-template>
+                <ng-template #empty> No Telecom Service Data Yet </ng-template>
             </div>
         </div>
     </div>
