@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Product } from './product';
+import { IProduct } from './product';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,16 +9,19 @@ import { DataService } from '../data.service';
     styleUrls: ['./product-list.component.css']
 })
 
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
     pageTitle = 'Product List';
     imageWidth = 100;
     imageMargin = 2;
     showImage = false;
-    listFilter = 'rad';
-    productsObservable: Observable<Product[]>;
+    listFilter = '';
+    productsObservable: Observable<IProduct[]>;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService) { }
+
+    ngOnInit(): void {
         this.productsObservable = this.dataService.get_products();
+        // this.productsObservable.subscribe(res => console.log(res));
     }
 
     toggleImage(): void {

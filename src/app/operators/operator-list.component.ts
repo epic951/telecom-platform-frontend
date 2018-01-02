@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Operator } from './operator';
+import { IOperator } from './operator';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,15 +9,17 @@ import { DataService } from '../data.service';
     styleUrls: ['./operator-list.component.css']
 })
 
-export class OperatorListComponent {
+export class OperatorListComponent implements OnInit {
     pageTitle = 'Operator List';
     imageWidth = 100;
     imageMargin = 2;
     showImage = false;
-    listFilter = 'et';
-    operatorsObservable: Observable<Operator[]>;
+    listFilter = '';
+    operatorsObservable: Observable<IOperator[]>;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService) { }
+
+    ngOnInit(): void {
         this.operatorsObservable = this.dataService.get_operators();
     }
 

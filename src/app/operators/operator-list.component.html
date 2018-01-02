@@ -6,7 +6,7 @@
         <div class='panel-body'>
             <div class='row'>
                 <div class='col-md-2'>Filter by:</div>
-                <div class='col-md-4'>
+                <div class='col-md-1'>
                     <input type='text' [(ngModel)]='listFilter' />
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let operator of operators">
+                        <tr *ngFor="let operator of operators | operatorFilter:listFilter">
                             <td>
                                 <img *ngIf='showImage' [src]='operator.imageUrl' [title]='operator.operatorName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                             </td>
@@ -42,7 +42,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #empty> No Operator Data Yet </ng-template>
+                <ng-template #empty> No Operator Data Yet - App is waking up on Heroku :) </ng-template>
             </div>
         </div>
     </div>

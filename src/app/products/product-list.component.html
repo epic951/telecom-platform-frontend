@@ -33,20 +33,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of products">
+                        <tr *ngFor="let product of products | productFilter:listFilter">
                             <td>
                                 <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                             </td>
                             <td>#{{product.productId}}</td>
                             <td>{{product.productName}}</td>
                             <td>{{product.productDescription}}</td>
-                            <td>{{product.minPrice | currency:'USD':true:'1.2-2'}}</td>
-                            <td>{{product.maxPrice | currency:'EUR':true:'1.2-2'}}</td>
+                            <td>{{product.minPrice | currency:'USD':'symbol':'1.2-2'}}</td>
+                            <td>{{product.maxPrice | currency:'EUR':'symbol':'1.2-2'}}</td>
                             <td></td>
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #empty> No Product Data Yet </ng-template>
+                <ng-template #empty> No Product Data Yet - App is waking up on Heroku :) </ng-template>
             </div>
         </div>
     </div>

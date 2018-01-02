@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
 import { OperatorListComponent } from './operators/operator-list.component';
 import { TelecomServiceListComponent } from './telecomservices/telecomservice-list.component';
+import { OperatorFilterPipe } from './operators/operator-filter.pipe';
+import { TelecomServiceFilterPipe } from './telecomservices/telecomservice-filter.pipe';
+import { ProductFilterPipe } from './products/product-filter.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent, ProductListComponent, OperatorListComponent, TelecomServiceListComponent
+    AppComponent, ProductListComponent, OperatorListComponent, TelecomServiceListComponent, OperatorFilterPipe,
+    TelecomServiceFilterPipe, ProductFilterPipe
   ],
   imports: [
     BrowserModule,

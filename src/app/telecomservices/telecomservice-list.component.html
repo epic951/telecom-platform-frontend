@@ -27,15 +27,14 @@
                             <th>Telecom Service ID</th>
                             <th>Telecom Service Name</th>
                             <th>Telecom Service Type</th>
+                            <th>Operator Service Id/Package Id</th>
                             <th>Operator Id</th>
                             <th>Operator Name</th>
-                            <th>Operator Service Id</th>
-                            <th>Operator Package Id</th>
                             <th>Rating</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let telecomservice of telecomservices">
+                        <tr *ngFor="let telecomservice of telecomservices | telecomServiceFilter:listFilter">
                             <td>
                                 <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.width.px]='imageWidth'
                                     [style.margin.px]='imageMargin'>
@@ -43,15 +42,14 @@
                             <td>#{{telecomservice.telecomServiceId}}</td>
                             <td>{{telecomservice.telecomServiceName}}</td>
                             <td>{{telecomservice.telecomServiceType}}</td>
+                            <td>#{{telecomservice.operatorServiceId}} / #{{telecomservice.operatorPackageId}}</td>
                             <td>#{{telecomservice.operatorId}}</td>
                             <td>{{telecomservice.operatorName}}</td>
-                            <td>#{{telecomservice.operatorServiceId}}</td>
-                            <td>#{{telecomservice.operatorPackageId}}</td>
                             <td></td>
                         </tr>
                     </tbody>
                 </table>
-                <ng-template #empty> No Telecom Service Data Yet </ng-template>
+                <ng-template #empty> No Telecom Service Data Yet - App is waking up on Heroku :) </ng-template>
             </div>
         </div>
     </div>

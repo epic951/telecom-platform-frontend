@@ -1,4 +1,4 @@
-export class TelecomService {
+export interface ITelecomService {
     telecomServiceId: number;
     telecomServiceName: string;
     telecomServiceType: boolean;
@@ -7,6 +7,4 @@ export class TelecomService {
     operatorServiceId: number;
     operatorPackageId: number;
     imageUrl: string;
-    constructor() {
-    }
 }

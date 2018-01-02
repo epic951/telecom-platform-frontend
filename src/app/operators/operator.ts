@@ -1,8 +1,6 @@
-export class Operator {
+export interface IOperator {
     operatorId: number;
     operatorName: string;
     operatorCountry: string;
     imageUrl: string;
-    constructor() {
-    }
 }

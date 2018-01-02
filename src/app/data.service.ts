@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Product } from './products/product';
-import { Operator } from './operators/operator';
+import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { HttpParams } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { TelecomService } from './telecomservices/telecomservice';
+import { IProduct } from './products/product';
+import { IOperator } from './operators/operator';
+import { ITelecomService } from './telecomservices/telecomservice';
 
 @Injectable()
 export class DataService {
@@ -26,16 +24,16 @@ export class DataService {
 
     }
 
-    get_products(): Observable<Product[]> {
-        return this.httpClient.get<Product[]>(this.baseUrl + 'products', { headers: this.headers });
+    get_products(): Observable<IProduct[]> {
+        return this.httpClient.get<IProduct[]>(this.baseUrl + 'products', { headers: this.headers });
     }
 
-    get_operators(): Observable<Operator[]> {
-        return this.httpClient.get<Operator[]>(this.baseUrl + 'operators', { headers: this.headers });
+    get_operators(): Observable<IOperator[]> {
+        return this.httpClient.get<IOperator[]>(this.baseUrl + 'operators', { headers: this.headers });
     }
 
-    get_telecomservices(): Observable<TelecomService[]> {
-        return this.httpClient.get<TelecomService[]>(this.baseUrl + 'services', { headers: this.headers });
+    get_telecomservices(): Observable<ITelecomService[]> {
+        return this.httpClient.get<ITelecomService[]>(this.baseUrl + 'services', { headers: this.headers });
     }
 
 }

@@ -1,5 +1,8 @@
-td {
+td{
     word-wrap: break-word;
-    text-justify: distribute;
     width: 10%;
+    text-align: justify;
+}
+th{
+    width: 11%;
 }
