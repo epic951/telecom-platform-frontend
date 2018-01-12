@@ -9,7 +9,7 @@ import { ITelecomService } from './telecomservices/telecomservice';
 @Injectable()
 export class DataService {
 
-    baseUrl = 'https://telecom-platform.herokuapp.com/api/get';
+    baseUrl = 'https://telecom-platform-backend.herokuapp.com/api/get';
 
     // Currently static credentials
     username = 'admin';
