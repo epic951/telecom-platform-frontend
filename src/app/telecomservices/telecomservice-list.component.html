@@ -45,7 +45,9 @@
                             <td>#{{telecomservice.operatorServiceId}} / #{{telecomservice.operatorPackageId}}</td>
                             <td>#{{telecomservice.operatorId}}</td>
                             <td>{{telecomservice.operatorName}}</td>
-                            <td></td>
+                            <td>
+                                <app-star [rating]='telecomservice.rating' (ratingClicked)='onRatingClicked($event)'></app-star>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

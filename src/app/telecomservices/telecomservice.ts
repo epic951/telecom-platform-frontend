@@ -7,4 +7,5 @@ export interface ITelecomService {
     operatorServiceId: number;
     operatorPackageId: number;
     imageUrl: string;
+    rating: number;
 }

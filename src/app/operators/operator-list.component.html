@@ -38,7 +38,9 @@
                             <td>#{{operator.operatorId}}</td>
                             <td>{{operator.operatorName}}</td>
                             <td>{{operator.operatorCountry}}</td>
-                            <td></td>
+                            <td>
+                                <app-star [rating]='operator.rating' (ratingClicked)='onRatingClicked($event)'></app-star>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

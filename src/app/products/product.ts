@@ -5,4 +5,5 @@ export interface IProduct {
     minPrice: number;
     maxPrice: number;
     imageUrl: string;
+    rating: number;
 }

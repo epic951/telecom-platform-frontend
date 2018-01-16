@@ -3,4 +3,5 @@ export interface IOperator {
     operatorName: string;
     operatorCountry: string;
     imageUrl: string;
+    rating: number;
 }

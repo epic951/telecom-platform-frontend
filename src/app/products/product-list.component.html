@@ -42,7 +42,9 @@
                             <td>{{product.productDescription}}</td>
                             <td>{{product.minPrice | currency:'USD':'symbol':'1.2-2'}}</td>
                             <td>{{product.maxPrice | currency:'EUR':'symbol':'1.2-2'}}</td>
-                            <td></td>
+                            <td>
+                                <app-star [rating]='product.rating' (ratingClicked)='onRatingClicked($event)'></app-star>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

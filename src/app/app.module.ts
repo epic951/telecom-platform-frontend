@@ -11,11 +11,12 @@ import { TelecomServiceListComponent } from './telecomservices/telecomservice-li
 import { OperatorFilterPipe } from './operators/operator-filter.pipe';
 import { TelecomServiceFilterPipe } from './telecomservices/telecomservice-filter.pipe';
 import { ProductFilterPipe } from './products/product-filter.pipe';
+import { StarComponent } from './shared/star.component';
 
 @NgModule({
   declarations: [
     AppComponent, ProductListComponent, OperatorListComponent, TelecomServiceListComponent, OperatorFilterPipe,
-    TelecomServiceFilterPipe, ProductFilterPipe
+    TelecomServiceFilterPipe, ProductFilterPipe, StarComponent
   ],
   imports: [
     BrowserModule,

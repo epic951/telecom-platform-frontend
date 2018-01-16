@@ -23,6 +23,10 @@ export class OperatorListComponent implements OnInit {
         this.operatorsObservable = this.dataService.get_operators();
     }
 
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Operator List: ' + message;
+    }
+
     toggleImage(): void {
         this.showImage = !this.showImage;
     }
