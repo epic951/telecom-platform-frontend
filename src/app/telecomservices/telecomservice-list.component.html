@@ -27,7 +27,7 @@
                             <th>Telecom Service ID</th>
                             <th>Telecom Service Name</th>
                             <th>Telecom Service Type</th>
-                            <th>Operator Service Id/Package Id</th>
+                            <th>Operator SID/PID</th>
                             <th>Operator Id</th>
                             <th>Operator Name</th>
                             <th>Rating</th>
@@ -36,8 +36,7 @@
                     <tbody>
                         <tr *ngFor="let telecomservice of telecomservices | telecomServiceFilter:listFilter">
                             <td>
-                                <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.width.px]='imageWidth'
-                                    [style.margin.px]='imageMargin'>
+                                <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.margin.px]='imageMargin'>
                             </td>
                             <td>#{{telecomservice.telecomServiceId}}</td>
                             <td>{{telecomservice.telecomServiceName}}</td>

@@ -11,7 +11,6 @@ import { DataService } from '../data.service';
 
 export class OperatorListComponent implements OnInit {
     pageTitle = 'Operator List';
-    imageWidth = 100;
     imageMargin = 2;
     showImage = false;
     listFilter = '';
@@ -24,7 +23,7 @@ export class OperatorListComponent implements OnInit {
     }
 
     onRatingClicked(message: string): void {
-        this.pageTitle = 'Operator List: ' + message;
+        this.pageTitle = 'Yes the Rating : ' + message;
     }
 
     toggleImage(): void {

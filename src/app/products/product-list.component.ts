@@ -11,7 +11,6 @@ import { DataService } from '../data.service';
 
 export class ProductListComponent implements OnInit {
     pageTitle = 'Product List';
-    imageWidth = 100;
     imageMargin = 2;
     showImage = false;
     listFilter = '';
@@ -21,7 +20,10 @@ export class ProductListComponent implements OnInit {
 
     ngOnInit(): void {
         this.productsObservable = this.dataService.get_products();
-        // this.productsObservable.subscribe(res => console.log(res));
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Yes the Rating : ' + message;
     }
 
     toggleImage(): void {

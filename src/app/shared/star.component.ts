@@ -14,11 +14,10 @@ export class StarComponent implements OnChanges {
 
     ngOnChanges(): void {
         this.starWidth = this.rating * 86 / 5.5;
-        console.log('after width = ' + this.starWidth + ' rating ' + this.rating);
     }
 
     onClick(): void {
-        this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+        this.ratingClicked.emit(`${this.rating} you clicked is accurate!`);
     }
 
 }

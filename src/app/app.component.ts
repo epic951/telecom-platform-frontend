@@ -8,7 +8,7 @@ import { DataService } from './data.service';
 })
 
 export class AppComponent {
-  pageTitle = 'telecom-platform ';
+  pageTitle = 'Telecom-Platform ';
 
   constructor(private dataService: DataService) {
     // this.dataService.get_products().subscribe((res: Product[]) => {

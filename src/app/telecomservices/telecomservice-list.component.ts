@@ -11,7 +11,6 @@ import { DataService } from '../data.service';
 
 export class TelecomServiceListComponent implements OnInit {
     pageTitle = 'Telecom Services List';
-    imageWidth = 100;
     imageMargin = 2;
     showImage = false;
     listFilter = '';
@@ -21,6 +20,10 @@ export class TelecomServiceListComponent implements OnInit {
 
     ngOnInit(): void {
         this.telecomservicesObservable = this.dataService.get_telecomservices();
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Yes the Rating : ' + message;
     }
 
     toggleImage(): void {

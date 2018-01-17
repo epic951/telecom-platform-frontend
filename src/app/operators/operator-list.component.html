@@ -33,7 +33,7 @@
                     <tbody>
                         <tr *ngFor="let operator of operators | operatorFilter:listFilter">
                             <td>
-                                <img *ngIf='showImage' [src]='operator.imageUrl' [title]='operator.operatorName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
+                                <img *ngIf='showImage' [src]='operator.imageUrl' [title]='operator.operatorName' [style.margin.px]='imageMargin'>
                             </td>
                             <td>#{{operator.operatorId}}</td>
                             <td>{{operator.operatorName}}</td>
