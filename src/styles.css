@@ -10,6 +10,8 @@ html {
 }
 
 body {
+    width: 75%;
+    margin: auto;
     font-family: 'Exo 2', sans-serif;
     line-height: 150%;
     font-size: 1.8em;
@@ -39,9 +41,5 @@ tr {
 div.panel-heading {
     font-size: x-large;
     width: 50%;
-    margin: auto;
-}
-body{
-    width: 75%;
     margin: auto;
 }

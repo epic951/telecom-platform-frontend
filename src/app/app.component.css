@@ -7,3 +7,14 @@ img{
     max-height: 150px;
     max-width: 150px;
 }
+ul{
+    text-align: center;
+    align-content: center;
+}
+nav{
+    max-width: 85%;
+    margin-left: 7%;
+}
+.container{
+    width: 85%;
+}

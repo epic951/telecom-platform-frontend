@@ -24,9 +24,9 @@
                                     {{showImage ? 'Hide' : 'Show'}} Image
                                 </button>
                             </th>
-                            <th>Telecom Service ID</th>
-                            <th>Telecom Service Name</th>
-                            <th>Telecom Service Type</th>
+                            <th>Service ID</th>
+                            <th>Service Name</th>
+                            <th>Service Type</th>
                             <th>Operator SID/PID</th>
                             <th>Operator Id</th>
                             <th>Operator Name</th>
@@ -39,7 +39,9 @@
                                 <img *ngIf='showImage' [src]='telecomservice.imageUrl' [title]='telecomservice.telecomServiceName' [style.margin.px]='imageMargin'>
                             </td>
                             <td>#{{telecomservice.telecomServiceId}}</td>
-                            <td>{{telecomservice.telecomServiceName}}</td>
+                            <td>
+                                <a [routerLink]="['/services',telecomservice.telecomServiceId]">{{telecomservice.telecomServiceName}}</a>
+                            </td>
                             <td>{{telecomservice.telecomServiceType}}</td>
                             <td>#{{telecomservice.operatorServiceId}} / #{{telecomservice.operatorPackageId}}</td>
                             <td>#{{telecomservice.operatorId}}</td>

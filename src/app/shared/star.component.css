@@ -1,6 +1,7 @@
 .crop {
     overflow: hidden;
-    font-size: small;
+    font-size: 0.8em;
+    /* padding-left: 3%; */
 }
 div {
     cursor: pointer;

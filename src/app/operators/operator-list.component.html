@@ -36,10 +36,13 @@
                                 <img *ngIf='showImage' [src]='operator.imageUrl' [title]='operator.operatorName' [style.margin.px]='imageMargin'>
                             </td>
                             <td>#{{operator.operatorId}}</td>
-                            <td>{{operator.operatorName}}</td>
+                            <td>
+                                <a [routerLink]="['/operators',operator.operatorId]">{{operator.operatorName}}</a>
+                            </td>
                             <td>{{operator.operatorCountry}}</td>
                             <td>
-                                <app-star [rating]='operator.rating' (ratingClicked)='onRatingClicked($event)'></app-star>
+                                <app-star [rating]='operator.rating' (ratingClicked)='onRatingClicked($event)'>
+                                </app-star>
                             </td>
                         </tr>
                     </tbody>

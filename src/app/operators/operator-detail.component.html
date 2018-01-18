@@ -1,0 +1,37 @@
+<div class='panel panel-primary' *ngIf='operator' style="background-color: rgba(238, 222, 222,0.8);">
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='row'>
+                    <div class='col-md-3'>ID:</div>
+                    <div class='col-md-6'>{{operator.operatorId}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Name:</div>
+                    <div class='col-md-6'>{{operator.operatorName}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Country:</div>
+                    <div class='col-md-6'>{{operator.operatorCountry}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Rating:</div>
+                    <div class='col-md-6' style="padding-left:20%">
+                        <app-star [rating]='operator.rating'></app-star>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='operator.imageUrl' [title]='operator.operatorName'>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default" (click)='onBack()' style='width:80px'>
+            <i class="glyphicon glyphicon-chevron-left"></i>Back
+        </a>
+    </div>
+</div>

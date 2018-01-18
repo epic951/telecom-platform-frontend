@@ -1,0 +1,45 @@
+<div class='panel panel-primary' *ngIf='product' style="background-color: rgba(238, 222, 222,0.8);">
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='row'>
+                    <div class='col-md-3'>ID:</div>
+                    <div class='col-md-6'>{{product.productId}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Name:</div>
+                    <div class='col-md-6'>{{product.productName}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Description:</div>
+                    <div class='col-md-6'>{{product.productDescription}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Min Price:</div>
+                    <div class='col-md-6'>{{product.minPrice | currency:'USD':'symbol':'1.2-2'}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Max Price:</div>
+                    <div class='col-md-6'>{{product.maxPrice | currency:'EUR':'symbol':'1.2-2'}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Rating:</div>
+                    <div class='col-md-6' style="padding-left:20%">
+                        <app-star [rating]='product.rating'></app-star>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='product.imageUrl' [title]='product.productName'>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default" (click)='onBack()' style='width:80px'>
+            <i class="glyphicon glyphicon-chevron-left"></i>Back
+        </a>
+    </div>
+</div>
