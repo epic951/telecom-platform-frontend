@@ -21,21 +21,18 @@ function operatorIntegrityEnforcer(c: AbstractControl): { [key: string]: boolean
     if (temp.toLowerCase() === 'orange') {
         console.log('orange');
         if (opSID.value === null || opSID.value === '') {
-            console.log('&&');
             opSID.setErrors({ 'required': true });
         }
     }
     if (temp.toLowerCase() === 'vodafone') {
         console.log('orange');
         if (opSID.value === null || opSID.value === '' || opPID.value === null || opPID.value === '') {
-            console.log('&&');
             opSID.setErrors({ 'required': true });
             opPID.setErrors({ 'required': true });
         }
     }
     if (temp.toLowerCase() !== 'etisalat' && temp.toLowerCase() !== 'orange' && temp.toLowerCase() !== 'vodafone') {
         if (opPID.value === null || opPID.value === '') {
-            console.log('!!');
             opPID.setErrors(null);
             opSID.setErrors(null);
         }

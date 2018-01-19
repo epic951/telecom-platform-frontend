@@ -5,25 +5,51 @@
     <div>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand">{{pageTitle}}</a>
+                <a class="navbar-brand" style="margin-top:7px">{{pageTitle}}</a>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a [routerLink]="['/welcome']">Home</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                [routerLink]="['/welcome']">
+                                Home
+                            </button>
+                        </div>
                     </li>
                     <li>
-                        <a [routerLink]="['/operators']">Operators</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Operators
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" [routerLink]="['/operators']">Operators</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" [routerLink]="['add-operator']">Add Operator</a>
+                            </div>
+                        </div>
                     </li>
                     <li>
-                        <a [routerLink]="['/products']">Products</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Products
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" [routerLink]="['/products']">Products</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" [routerLink]="['add-product']">Add Product</a>
+                            </div>
+                        </div>
                     </li>
                     <li>
-                        <a [routerLink]="['/services']">Services</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['add-product']">Add Product</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['add-service']">Add Service</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Services
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" [routerLink]="['/services']">Services</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" [routerLink]="['add-service']">Add Service</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

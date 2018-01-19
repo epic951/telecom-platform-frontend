@@ -18,3 +18,16 @@ nav{
 .container{
     width: 85%;
 }
+li{
+    margin:15px 10px;
+}
+.dropdown-menu{
+    background-color: lavender;
+}
+a.dropdown-menu{
+    font-size: 1.2em;
+    padding: 10px;
+}
+.dropdown-item{
+    margin:10px;
+}

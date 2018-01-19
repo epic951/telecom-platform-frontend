@@ -22,12 +22,13 @@ import { StarComponent } from './shared/star.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductComponent } from './products/product.component';
 import { TelecomServiceComponent } from './telecomservices/telecomservice.component';
+import { OperatorComponent } from './operators/operator.component';
 
 @NgModule({
   declarations: [
     AppComponent, ProductListComponent, OperatorListComponent, TelecomServiceListComponent, OperatorFilterPipe,
     TelecomServiceFilterPipe, ProductFilterPipe, StarComponent, WelcomeComponent, ProductDetailComponent,
-    OperatorDetailComponent, TelecomServiceDetailComponent, ProductComponent, TelecomServiceComponent
+    OperatorDetailComponent, TelecomServiceDetailComponent, ProductComponent, TelecomServiceComponent, OperatorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,7 @@ import { TelecomServiceComponent } from './telecomservices/telecomservice.compon
       { path: 'services/:id', canActivate: [TelecomServiceDetailGuard], component: TelecomServiceDetailComponent },
       { path: 'add-product', component: ProductComponent },
       { path: 'add-service', component: TelecomServiceComponent },
+      { path: 'add-operator', component: OperatorComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }])

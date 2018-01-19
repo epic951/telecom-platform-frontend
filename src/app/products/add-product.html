@@ -6,8 +6,7 @@
                 <div class="form-group" [ngClass]="{'has-error':(productForm.get('productId').touched || productForm.get('productId').dirty) && !productForm.get('productId').valid}">
                     <label class="col-md-2 control-label" for="productId">ID</label>
                     <div class="col-md-8">
-                        <input class="form-control" id="productId" type="text" placeholder="Product Description (required)" formControlName="productId"
-                        />
+                        <input class="form-control" id="productId" type="text" placeholder="Product ID (required)" formControlName="productId" />
                         <span class="help-block" *ngIf="(productForm.get('productId').touched || 
                                 productForm.get('productId').dirty) && 
                                 productForm.get('productId').errors">
@@ -55,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group" [ngClass]="{'has-error':(productForm.get('minPrice').touched || productForm.get('minPrice').dirty) && !productForm.get('minPrice').valid}">
-                    <label class="col-md-2 control-label" for="productDescription">Minimum Price</label>
+                    <label class="col-md-2 control-label" for="minPrice">Minimum Price</label>
                     <div class="col-md-8">
                         <input class="form-control" id="minPrice" type="text" placeholder="Minimum Price (optional)" formControlName="minPrice" />
                         <span class="help-block" *ngIf="(productForm.get('minPrice').touched || 
@@ -87,17 +86,14 @@
                     </div>
                 </div>
                 <div class="form-group" [ngClass]="{'has-error':(productForm.get('imageUrl').touched || productForm.get('imageUrl').dirty) && !productForm.get('imageUrl').valid}">
-                    <label class="col-md-2 control-label" for="imageUrl">Image URL</label>
+                    <label class="col-md-2 control-label" for="operatorPackageId">Image URL</label>
                     <div class="col-md-8">
                         <input class="form-control" id="imageUrl" type="text" placeholder="Image URL (optional)" formControlName="imageUrl" />
                         <span class="help-block" *ngIf="(productForm.get('imageUrl').touched || 
-                                            productForm.get('imageUrl').dirty) && 
-                                            productForm.get('imageUrl').errors">
-                            <span *ngIf="productForm.get('imageUrl').errors?.required">
-                                Please enter the image URL.
-                            </span>
-                            <span *ngIf="productForm.get('imageUrl').errors?.minlength">
-                                Image URL must be 5 characters or more
+                                                productForm.get('imageUrl').dirty) && 
+                                                productForm.get('imageUrl').errors">
+                            <span *ngIf="productForm.get('imageUrl').errors?.pattern">
+                                Please enter a valid image URL.
                             </span>
                         </span>
                     </div>
@@ -107,13 +103,16 @@
                     <div class="col-md-8">
                         <input class="form-control" id="rating" type="text" placeholder="Rating (optional)" formControlName="rating" />
                         <span class="help-block" *ngIf="(productForm.get('rating').touched || 
-                                                productForm.get('rating').dirty) && 
-                                                productForm.get('rating').errors">
-                            <span *ngIf="productForm.get('rating').errors?.required">
-                                Please enter the rating.
+                                                    productForm.get('rating').dirty) && 
+                                                    productForm.get('rating').errors">
+                            <span *ngIf="productForm.get('rating').errors?.pattern">
+                                Please enter a valid rating from 1 to 5.
                             </span>
-                            <span *ngIf="productForm.get('rating').errors?.minlength">
-                                The ratings allowed are 0-5.
+                            <span *ngIf="productForm.get('rating').errors?.min">
+                                The rating cannot be lower than 1.
+                            </span>
+                            <span *ngIf="productForm.get('rating').errors?.max">
+                                The rating cannot be higher than 5.
                             </span>
                         </span>
                     </div>
