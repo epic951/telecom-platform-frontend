@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DataService } from './data.service';
@@ -20,16 +20,19 @@ import { TelecomServiceFilterPipe } from './telecomservices/telecomservice-filte
 import { TelecomServiceDetailGuard } from './telecomservices/telecomservice-detail.guard';
 import { StarComponent } from './shared/star.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { ProductComponent } from './products/product.component';
+import { TelecomServiceComponent } from './telecomservices/telecomservice.component';
 
 @NgModule({
   declarations: [
     AppComponent, ProductListComponent, OperatorListComponent, TelecomServiceListComponent, OperatorFilterPipe,
     TelecomServiceFilterPipe, ProductFilterPipe, StarComponent, WelcomeComponent, ProductDetailComponent,
-    OperatorDetailComponent, TelecomServiceDetailComponent
+    OperatorDetailComponent, TelecomServiceDetailComponent, ProductComponent, TelecomServiceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(
       [{ path: 'products', component: ProductListComponent },
@@ -38,6 +41,8 @@ import { WelcomeComponent } from './home/welcome.component';
       { path: 'products/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
       { path: 'operators/:id', canActivate: [OperatorDetailGuard], component: OperatorDetailComponent },
       { path: 'services/:id', canActivate: [TelecomServiceDetailGuard], component: TelecomServiceDetailComponent },
+      { path: 'add-product', component: ProductComponent },
+      { path: 'add-service', component: TelecomServiceComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }])
