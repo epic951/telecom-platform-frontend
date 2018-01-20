@@ -3,118 +3,55 @@
     <div class="panel-body">
         <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="productForm">
             <fieldset>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('productId').touched || productForm.get('productId').dirty) && !productForm.get('productId').valid}">
+                <div class="form-group" [ngClass]="{'has-error':productIdMsg}">
                     <label class="col-md-2 control-label" for="productId">ID</label>
                     <div class="col-md-8">
                         <input class="form-control" id="productId" type="text" placeholder="Product ID (required)" formControlName="productId" />
-                        <span class="help-block" *ngIf="(productForm.get('productId').touched || 
-                                productForm.get('productId').dirty) && 
-                                productForm.get('productId').errors">
-                            <span *ngIf="productForm.get('productId').errors?.required">
-                                Please enter the product ID.
-                            </span>
-                            <span *ngIf="productForm.get('productId').errors?.minlength">
-                                The product ID must not be null.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="productIdMsg">Product ID {{productIdMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('productName').touched || productForm.get('productName').dirty) && !productForm.get('productName').valid}">
+                <div class="form-group" [ngClass]="{'has-error':productNameMsg}">
                     <label class="col-md-2 control-label" for="productName">Name</label>
                     <div class="col-md-8">
                         <input class="form-control" id="productName" type="text" placeholder="Product Name (required)" formControlName="productName"
                         />
-                        <span class="help-block" *ngIf="(productForm.get('productName').touched || 
-                        productForm.get('productName').dirty) && 
-                        productForm.get('productName').errors">
-                            <span *ngIf="productForm.get('productName').errors?.required">
-                                Please enter the product name.
-                            </span>
-                            <span *ngIf="productForm.get('productName').errors?.minlength">
-                                The product name must be longer than 3 characters.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="productNameMsg">Product Name {{productNameMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('productDescription').touched || productForm.get('productDescription').dirty) && !productForm.get('productDescription').valid}">
+                <div class="form-group" [ngClass]="{'has-error':productDescriptionMsg}">
                     <label class="col-md-2 control-label" for="productDescription">Description</label>
                     <div class="col-md-8">
                         <input class="form-control" id="productDescription" type="text" placeholder="Product Description (optional)" formControlName="productDescription"
                         />
-                        <span class="help-block" *ngIf="(productForm.get('productDescription').touched || 
-                                productForm.get('productDescription').dirty) && 
-                                productForm.get('productDescription').errors">
-                            <span *ngIf="productForm.get('productDescription').errors?.required">
-                                Please enter the product description.
-                            </span>
-                            <span *ngIf="productForm.get('productDescription').errors?.minlength">
-                                The product description must be longer than 3 characters.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="productDescriptionMsg">Product Description {{productDescriptionMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('minPrice').touched || productForm.get('minPrice').dirty) && !productForm.get('minPrice').valid}">
+                <div class="form-group" [ngClass]="{'has-error':minPriceMsg}">
                     <label class="col-md-2 control-label" for="minPrice">Minimum Price</label>
                     <div class="col-md-8">
                         <input class="form-control" id="minPrice" type="text" placeholder="Minimum Price (optional)" formControlName="minPrice" />
-                        <span class="help-block" *ngIf="(productForm.get('minPrice').touched || 
-                                    productForm.get('minPrice').dirty) && 
-                                    productForm.get('minPrice').errors">
-                            <span *ngIf="productForm.get('minPrice').errors?.required">
-                                Please enter the minimum price.
-                            </span>
-                            <span *ngIf="productForm.get('minPrice').errors?.minlength">
-                                The minimum price must not be zero or higher.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="minPriceMsg">Minimum Price {{minPriceMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('maxPrice').touched || productForm.get('maxPrice').dirty) && !productForm.get('maxPrice').valid}">
+                <div class="form-group" [ngClass]="{'has-error':maxPriceMsg}">
                     <label class="col-md-2 control-label" for="maxPrice">Maximum Price</label>
                     <div class="col-md-8">
                         <input class="form-control" id="maxPrice" type="text" placeholder="Maximum Price (optional)" formControlName="maxPrice" />
-                        <span class="help-block" *ngIf="(productForm.get('maxPrice').touched || 
-                                        productForm.get('maxPrice').dirty) && 
-                                        productForm.get('maxPrice').errors">
-                            <span *ngIf="productForm.get('maxPrice').errors?.required">
-                                Please enter the maximum price.
-                            </span>
-                            <span *ngIf="productForm.get('maxPrice').errors?.minlength">
-                                The maximum price must not be zero or higher.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="maxPriceMsg">Maximum Price {{maxPriceMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('imageUrl').touched || productForm.get('imageUrl').dirty) && !productForm.get('imageUrl').valid}">
+                <div class="form-group" [ngClass]="{'has-error':imageUrlMsg}">
                     <label class="col-md-2 control-label" for="operatorPackageId">Image URL</label>
                     <div class="col-md-8">
                         <input class="form-control" id="imageUrl" type="text" placeholder="Image URL (optional)" formControlName="imageUrl" />
-                        <span class="help-block" *ngIf="(productForm.get('imageUrl').touched || 
-                                                productForm.get('imageUrl').dirty) && 
-                                                productForm.get('imageUrl').errors">
-                            <span *ngIf="productForm.get('imageUrl').errors?.pattern">
-                                Please enter a valid image URL.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="imageUrlMsg">Image URL {{imageUrlMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(productForm.get('rating').touched || productForm.get('rating').dirty) && !productForm.get('rating').valid}">
+                <div class="form-group" [ngClass]="{'has-error':ratingMsg}">
                     <label class="col-md-2 control-label" for="rating">Rating</label>
                     <div class="col-md-8">
                         <input class="form-control" id="rating" type="text" placeholder="Rating (optional)" formControlName="rating" />
-                        <span class="help-block" *ngIf="(productForm.get('rating').touched || 
-                                                    productForm.get('rating').dirty) && 
-                                                    productForm.get('rating').errors">
-                            <span *ngIf="productForm.get('rating').errors?.pattern">
-                                Please enter a valid rating from 1 to 5.
-                            </span>
-                            <span *ngIf="productForm.get('rating').errors?.min">
-                                The rating cannot be lower than 1.
-                            </span>
-                            <span *ngIf="productForm.get('rating').errors?.max">
-                                The rating cannot be higher than 5.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="ratingMsg">Rating {{ratingMsg}}</span>
                     </div>
                 </div>
                 <div class="form-group">

@@ -3,47 +3,20 @@
     <div class="panel-body">
         <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="serviceForm">
             <fieldset>
-                <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('telecomServiceId').touched || serviceForm.get('telecomServiceId').dirty) && !serviceForm.get('telecomServiceId').valid}">
+                <div class="form-group" [ngClass]="{'has-error':telecomServiceIdMsg}">
                     <label class="col-md-2 control-label" for="telecomServiceId">Service ID</label>
                     <div class="col-md-8">
                         <input class="form-control" id="telecomServiceId" type="text" placeholder="Service ID (required)" formControlName="telecomServiceId"
                         />
-                        <span class="help-block" *ngIf="(serviceForm.get('telecomServiceId').touched || 
-                                    serviceForm.get('telecomServiceId').dirty) && 
-                                    serviceForm.get('telecomServiceId').errors">
-                            <span *ngIf="serviceForm.get('telecomServiceId').errors?.required">
-                                Please enter the required Service ID.
-                            </span>
-                            <span *ngIf="serviceForm.get('telecomServiceId').errors?.min">
-                                The Service ID must be higher than 0.
-                            </span>
-                            <span *ngIf="serviceForm.get('telecomServiceId').errors?.pattern">
-                                Please enter a numerical only Service ID.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="telecomServiceIdMsg">Service ID {{telecomServiceIdMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('telecomServiceName').touched || serviceForm.get('telecomServiceName').dirty) && !serviceForm.get('telecomServiceName').valid}">
+                <div class="form-group" [ngClass]="{'has-error':telecomServiceNameMsg}">
                     <label class="col-md-2 control-label" for="telecomServiceName">Service Name</label>
                     <div class="col-md-8">
                         <input class="form-control" id="telecomServiceName" type="text" placeholder="Service Name (required)" formControlName="telecomServiceName"
                         />
-                        <span class="help-block" *ngIf="(serviceForm.get('telecomServiceName').touched || 
-                            serviceForm.get('telecomServiceName').dirty) && 
-                            serviceForm.get('telecomServiceName').errors">
-                            <span *ngIf="serviceForm.get('telecomServiceName').errors?.required">
-                                Please enter the required Service Name.
-                            </span>
-                            <span *ngIf="serviceForm.get('telecomServiceName').errors?.minlength">
-                                The Service Name must be longer than 3 characters.
-                            </span>
-                            <span *ngIf="serviceForm.get('telecomServiceName').errors?.maxlength">
-                                The Service Name must not exceed 30 characters.
-                            </span>
-                            <span *ngIf="serviceForm.get('telecomServiceName').errors?.pattern">
-                                Please enter a valid Service Name.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="telecomServiceNameMsg">Service Name {{telecomServiceNameMsg}}</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,35 +30,23 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('operatorId').touched || serviceForm.get('operatorId').dirty) && !serviceForm.get('operatorId').valid}">
+                <div class="form-group" [ngClass]="{'has-error':operatorIdMsg}">
                     <label class="col-md-2 control-label" for="operatorId">Operator ID</label>
                     <div class="col-md-8">
                         <input class="form-control" id="operatorId" type="text" placeholder="Operator ID (required)" formControlName="operatorId"
                         />
-                        <span class="help-block" *ngIf="(serviceForm.get('operatorId').touched || 
-                                        serviceForm.get('operatorId').dirty) && 
-                                        serviceForm.get('operatorId').errors">
-                            <span *ngIf="serviceForm.get('operatorId').errors?.required">
-                                Please enter the required Operator ID.
-                            </span>
-                            <span *ngIf="serviceForm.get('operatorId').errors?.min">
-                                The operator ID must be higher than 0.
-                            </span>
-                            <span *ngIf="serviceForm.get('operatorId').errors?.pattern">
-                                Please enter a numerical only Operator ID.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="operatorIdMsg">Operator ID {{operatorIdMsg}}</span>
                     </div>
                 </div>
                 <div formGroupName="operatorGroup" [ngClass]="{'has-error': serviceForm.get('operatorGroup').errors }">
-                    <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('operatorGroup.operatorName').touched || serviceForm.get('operatorGroup.operatorName').dirty) && !serviceForm.get('operatorGroup.operatorName').valid}">
+                    <div class="form-group" [ngClass]="{'has-error': (serviceForm.get('operatorGroup.operatorName').touched || serviceForm.get('operatorGroup.operatorName').dirty) && !serviceForm.get('operatorGroup.operatorName').valid}">
                         <label class="col-md-2 control-label" for="operatorName">Operator Name</label>
                         <div class="col-md-8">
                             <input class="form-control" id="operatorName" type="text" placeholder="Operator Name (required)" formControlName="operatorName"
                             />
                             <span class="help-block" *ngIf="(serviceForm.get('operatorGroup.operatorName').touched || 
-                                    serviceForm.get('operatorGroup.operatorName').dirty) && 
-                                    (serviceForm.get('operatorGroup.operatorName').errors || serviceForm.get('operatorGroup').errors)">
+                            serviceForm.get('operatorGroup.operatorName').dirty) && 
+                            (serviceForm.get('operatorGroup.operatorName').errors || serviceForm.get('operatorGroup').errors)">
                                 <span *ngIf="serviceForm.get('operatorGroup.operatorName').errors?.required">
                                     Please enter the required operator name.
                                 </span>
@@ -98,14 +59,11 @@
                                 <span *ngIf="serviceForm.get('operatorGroup.operatorName').errors?.pattern">
                                     Please enter a valid Operator Name.
                                 </span>
-                                <span *ngIf="serviceForm.get('operatorGroup').errors?.operatorIntegrity">
-                                    Operator Integrity compromised.
-                                </span>
                             </span>
                         </div>
                     </div>
                     <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('operatorGroup.operatorServiceId').touched || serviceForm.get('operatorGroup.operatorServiceId').dirty) && !serviceForm.get('operatorGroup.operatorServiceId').valid}">
-                        <label class="col-md-2 control-label" for="operatorPackageId">Operator Service ID</label>
+                        <label class="col-md-2 control-label" for="operatorServiceId">Operator Service ID</label>
                         <div class="col-md-8">
                             <input class="form-control" id="operatorServiceId" type="text" placeholder="Operator Service ID (optional)" formControlName="operatorServiceId"
                             />
@@ -121,9 +79,6 @@
                                 </span>
                                 <span *ngIf="serviceForm.get('operatorGroup.operatorServiceId').errors?.pattern">
                                     Please enter a numerical only Operator Service ID.
-                                </span>
-                                <span *ngIf="serviceForm.get('operatorGroup').errors?.operatorIntegrity">
-                                    Operator Integrity compromised.
                                 </span>
                             </span>
                         </div>
@@ -145,43 +100,22 @@
                                 <span *ngIf="serviceForm.get('operatorGroup.operatorPackageId').errors?.pattern">
                                     Please enter a numerical only Operator Package ID.
                                 </span>
-                                <span *ngIf="serviceForm.get('operatorGroup').errors?.operatorIntegrity">
-                                    Operator Integrity compromised.
-                                </span>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('imageUrl').touched || serviceForm.get('imageUrl').dirty) && !serviceForm.get('imageUrl').valid}">
+                <div class="form-group" [ngClass]="{'has-error':imageUrlMsg}">
                     <label class="col-md-2 control-label" for="operatorPackageId">Image URL</label>
                     <div class="col-md-8">
                         <input class="form-control" id="imageUrl" type="text" placeholder="Image URL (optional)" formControlName="imageUrl" />
-                        <span class="help-block" *ngIf="(serviceForm.get('imageUrl').touched || 
-                                                serviceForm.get('imageUrl').dirty) && 
-                                                serviceForm.get('imageUrl').errors">
-                            <span *ngIf="serviceForm.get('imageUrl').errors?.pattern">
-                                Please enter a valid image URL.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="imageUrlMsg">Image URL {{imageUrlMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':(serviceForm.get('rating').touched || serviceForm.get('rating').dirty) && !serviceForm.get('rating').valid}">
+                <div class="form-group" [ngClass]="{'has-error':ratingMsg}">
                     <label class="col-md-2 control-label" for="rating">Rating</label>
                     <div class="col-md-8">
                         <input class="form-control" id="rating" type="text" placeholder="Rating (optional)" formControlName="rating" />
-                        <span class="help-block" *ngIf="(serviceForm.get('rating').touched || 
-                                                    serviceForm.get('rating').dirty) && 
-                                                    serviceForm.get('rating').errors">
-                            <span *ngIf="serviceForm.get('rating').errors?.pattern">
-                                Please enter a valid rating from 1 to 5.
-                            </span>
-                            <span *ngIf="serviceForm.get('rating').errors?.min">
-                                The rating cannot be lower than 1.
-                            </span>
-                            <span *ngIf="serviceForm.get('rating').errors?.max">
-                                The rating cannot be higher than 5.
-                            </span>
-                        </span>
+                        <span class="help-block" *ngIf="ratingMsg">Rating {{ratingMsg}}</span>
                     </div>
                 </div>
                 <div class="form-group">
