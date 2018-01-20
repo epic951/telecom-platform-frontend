@@ -12,21 +12,17 @@ function operatorIntegrityEnforcer(c: AbstractControl): { [key: string]: boolean
         return null;
     }
     if (temp.toLowerCase() === 'etisalat') {
-        console.log('etisalat');
         if (opPID.value === null || opPID.value === '') {
-            console.log('&&');
             // opPID.setValidators(Validators.required);
             opPID.setErrors({ 'required': true });
         }
     }
     if (temp.toLowerCase() === 'orange') {
-        console.log('orange');
         if (opSID.value === null || opSID.value === '') {
             opSID.setErrors({ 'required': true });
         }
     }
     if (temp.toLowerCase() === 'vodafone') {
-        console.log('vodafone');
         if (opSID.value === null || opSID.value === '' || opPID.value === null || opPID.value === '') {
             opSID.setErrors({ 'required': true });
             opPID.setErrors({ 'required': true });
