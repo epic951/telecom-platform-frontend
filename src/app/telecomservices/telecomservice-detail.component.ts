@@ -20,7 +20,7 @@ export class TelecomServiceDetailComponent implements OnInit {
     }
 
     find_service(id: number) {
-        return this._telecomService.find_service(id).subscribe(response => this.service = response);
+        return this._telecomService.find_telecomservice(id).subscribe(response => this.service = response);
     }
 
     onBack(): void {

@@ -1,16 +1,16 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Add Operator</div>
     <div class="panel-body">
-        <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="operatorForm">
+        <form class="form-horizontal" novalidate (ngSubmit)="saveOperator()" [formGroup]="operatorForm">
             <fieldset>
-                <div class="form-group" [ngClass]="{'has-error':operatorIdMsg}">
+                <!-- <div class="form-group" [ngClass]="{'has-error':operatorIdMsg}">
                     <label class="col-md-2 control-label" for="operatorId">ID</label>
                     <div class="col-md-8">
                         <input class="form-control" id="operatorId" type="text" placeholder="Operator Country (required)" formControlName="operatorId"
                         />
                         <span class="help-block" *ngIf="operatorIdMsg">Operator ID {{operatorIdMsg}}</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group" [ngClass]="{'has-error':operatorNameMsg}">
                     <label class="col-md-2 control-label" for="operatorName">Name</label>
                     <div class="col-md-8">

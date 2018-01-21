@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 import { IProduct } from './product';
 import 'rxjs/add/operator/debounceTime';
 
@@ -10,7 +12,7 @@ import 'rxjs/add/operator/debounceTime';
 export class ProductComponent implements OnInit {
     productForm: FormGroup;
     product: IProduct;
-    productIdMsg: string;
+    errorMessage: string;
     productNameMsg: string;
     productDescriptionMsg: string;
     minPriceMsg: string;
@@ -27,25 +29,24 @@ export class ProductComponent implements OnInit {
         max: ' cannot be higher than 9999.  '
     };
 
-    constructor(private builder: FormBuilder) { }
+    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
 
     ngOnInit(): void {
         this.productForm = this.builder.group({
-            productId: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]+')]],
+            productId: ['0'],
             productName: ['', [Validators.required, Validators.required, Validators.minLength(3),
             Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
             productDescription: ['', Validators.maxLength(35)],
-            minPrice: ['', [Validators.min(0), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
+            minPrice: ['', [Validators.min(1), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
             maxPrice: ['', [Validators.max(9999), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
             imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
         });
 
-        const controllers = [this.productForm.get('productId'),
-        this.productForm.get('productName'), this.productForm.get('productDescription'),
-        this.productForm.get('minPrice'), this.productForm.get('maxPrice'),
-        this.productForm.get('imageUrl'), this.productForm.get('rating')];
-        const messages = ['productIdMsg', 'productNameMsg', 'productDescriptionMsg',
+        const controllers = [this.productForm.get('productName'), this.productForm.get('productDescription'),
+        this.productForm.get('minPrice'), this.productForm.get('maxPrice'), this.productForm.get('imageUrl'),
+        this.productForm.get('rating')];
+        const messages = ['productNameMsg', 'productDescriptionMsg',
             'minPriceMsg', 'maxPriceMsg', 'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
             controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
@@ -53,13 +54,13 @@ export class ProductComponent implements OnInit {
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
-        if (msg === 'productIdMsg') {
-            this.productIdMsg = '';
-            if ((c.touched || c.dirty) && c.errors) {
-                console.log('@@');
-                this.productIdMsg = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
-            }
-        }
+        // if (msg === 'productIdMsg') {
+        //     this.productIdMsg = '';
+        //     if ((c.touched || c.dirty) && c.errors) {
+        //         console.log('@@');
+        //         this.productIdMsg = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
+        //     }
+        // }
         if (msg === 'productNameMsg') {
             this.productNameMsg = '';
             if ((c.touched || c.dirty) && c.errors) {
@@ -98,9 +99,23 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    save(): void {
-        console.log(this.productForm);
+    saveProduct(): void {
+        if (this.productForm.dirty && this.productForm.valid) {
+            // Overwrite the product object values by the form values
+            const p = Object.assign({}, this.product, this.productForm.value);
+            this.service.save_product(p).subscribe(() => this.saveOnComplete(),
+                (error: any) => this.errorMessage = <any>error);
+        } else if (!this.productForm.dirty) {
+            this.saveOnComplete();
+        }
         console.log('Saved: ' + JSON.stringify(this.productForm.value));
+    }
+
+    saveOnComplete(): void {
+        // Reset the form to clear the flags
+        this.productForm.reset();
+        this.router.navigate(['/products']);
+        console.log(this.errorMessage);
     }
 
 }

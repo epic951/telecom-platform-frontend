@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 import { IOperator } from './operator';
 import 'rxjs/add/operator/debounceTime';
 
@@ -10,7 +12,7 @@ import 'rxjs/add/operator/debounceTime';
 export class OperatorComponent implements OnInit {
     operatorForm: FormGroup;
     operator: IOperator;
-    operatorIdMsg: string;
+    errorMessage: string;
     operatorNameMsg: string;
     operatorCountryMsg: string;
     imageUrlMsg: string;
@@ -26,11 +28,11 @@ export class OperatorComponent implements OnInit {
     };
 
 
-    constructor(private builder: FormBuilder) { }
+    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
 
     ngOnInit(): void {
         this.operatorForm = this.builder.group({
-            operatorId: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]+')]],
+            operatorId: ['0'],
             operatorName: ['', [Validators.required, Validators.minLength(3),
             Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
             operatorCountry: ['', [Validators.maxLength(35), Validators.pattern('[a-zA-Z]+')]],
@@ -38,10 +40,9 @@ export class OperatorComponent implements OnInit {
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
         });
 
-        const controllers = [this.operatorForm.get('operatorId'),
-        this.operatorForm.get('operatorName'), this.operatorForm.get('operatorCountry'),
-        this.operatorForm.get('imageUrl'), this.operatorForm.get('rating')];
-        const messages = ['operatorIdMsg', 'operatorNameMsg', 'operatorCountryMsg',
+        const controllers = [this.operatorForm.get('operatorName'), this.operatorForm.get('operatorCountry')
+            , this.operatorForm.get('imageUrl'), this.operatorForm.get('rating')];
+        const messages = ['operatorNameMsg', 'operatorCountryMsg',
             'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
             controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
@@ -49,13 +50,6 @@ export class OperatorComponent implements OnInit {
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
-        if (msg === 'operatorIdMsg') {
-            this.operatorIdMsg = '';
-            if ((c.touched || c.dirty) && c.errors) {
-                console.log('@@');
-                this.operatorIdMsg = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
-            }
-        }
         if (msg === 'operatorNameMsg') {
             this.operatorNameMsg = '';
             if ((c.touched || c.dirty) && c.errors) {
@@ -82,8 +76,22 @@ export class OperatorComponent implements OnInit {
         }
     }
 
-    save(): void {
-        console.log(this.operatorForm);
+    saveOperator(): void {
+        if (this.operatorForm.dirty && this.operatorForm.valid) {
+            // Overwrite the operator object values by the form values
+            const o = Object.assign({}, this.operator, this.operatorForm.value);
+            this.service.save_operator(o).subscribe(() => this.saveOnComplete(),
+                (error: any) => this.errorMessage = <any>error);
+        } else if (!this.operatorForm.dirty) {
+            this.saveOnComplete();
+        }
+        console.log('Saved: ' + JSON.stringify(this.operatorForm.value));
+    }
+
+    saveOnComplete(): void {
+        // Reset the form to clear the flags
+        this.operatorForm.reset();
+        this.router.navigate(['/operators']);
         console.log('Saved: ' + JSON.stringify(this.operatorForm.value));
     }
 

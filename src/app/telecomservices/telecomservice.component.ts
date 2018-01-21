@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 import { ITelecomService } from './telecomservice';
 import 'rxjs/add/operator/debounceTime';
 
@@ -43,8 +45,8 @@ function operatorIntegrityEnforcer(c: AbstractControl): { [key: string]: boolean
 })
 export class TelecomServiceComponent implements OnInit {
     serviceForm: FormGroup;
-    service: ITelecomService;
-    telecomServiceIdMsg: string;
+    telecomService: ITelecomService;
+    errorMessage: string;
     telecomServiceNameMsg: string;
     operatorIdMsg: string;
     imageUrlMsg: string;
@@ -59,42 +61,35 @@ export class TelecomServiceComponent implements OnInit {
         max: ' cannot be higher than 5.  '
     };
 
-    constructor(private builder: FormBuilder) { }
+    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
 
     ngOnInit(): void {
         this.serviceForm = this.builder.group({
-            telecomServiceId: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]+')]],
+            telecomServiceId: ['0'],
             telecomServiceName: ['', [Validators.required, Validators.minLength(3),
             Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
-            telecomServiceType: 'subscription',
-            operatorId: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]+')]],
+            telecomServiceType: 'false',
+            operatorId: ['', [Validators.required, Validators.min(1), Validators.pattern('[0-9]+')]],
             operatorGroup: this.builder.group({
                 operatorName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30),
                 Validators.pattern('[a-zA-Z]+')]],
-                operatorServiceId: ['', [Validators.min(0), Validators.pattern('[0-9]+')]],
-                operatorPackageId: ['', [Validators.min(0), Validators.pattern('[0-9]+')]]
+                operatorServiceId: ['', [Validators.min(1), Validators.pattern('[0-9]+')]],
+                operatorPackageId: ['', [Validators.min(1), Validators.pattern('[0-9]+')]]
             }, { validator: operatorIntegrityEnforcer }),
             imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
         });
 
-        const controllers = [this.serviceForm.get('telecomServiceId'),
-        this.serviceForm.get('telecomServiceName'), this.serviceForm.get('operatorId'),
-        this.serviceForm.get('imageUrl'), this.serviceForm.get('rating')];
-        const messages = ['telecomServiceIdMsg', 'telecomServiceNameMsg', 'operatorIdMsg', 'imageUrlMsg', 'ratingMsg'];
+        const controllers = [this.serviceForm.get('telecomServiceName'), this.serviceForm.get('operatorId')
+            , this.serviceForm.get('imageUrl'), this.serviceForm.get('rating')];
+        const messages = ['telecomServiceNameMsg', 'operatorIdMsg', 'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
-            controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
+            controllers[i].valueChanges.debounceTime(700)
+                .subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
-        if (msg === 'telecomServiceIdMsg') {
-            this.telecomServiceIdMsg = '';
-            if ((c.touched || c.dirty) && c.errors) {
-                console.log('@@');
-                this.telecomServiceIdMsg = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
-            }
-        }
         if (msg === 'telecomServiceNameMsg') {
             this.telecomServiceNameMsg = '';
             if ((c.touched || c.dirty) && c.errors) {
@@ -121,8 +116,38 @@ export class TelecomServiceComponent implements OnInit {
         }
     }
 
-    save(): void {
-        console.log(this.serviceForm);
+    formatValues(): string {
+        const json = JSON.stringify(this.serviceForm.value);
+        const mainData = JSON.parse(json, (key, value) => {
+            if (key === 'operatorGroup') {
+                key = undefined;
+                value = undefined;
+            }
+            return value;
+        });
+        const groupData = JSON.parse(json)['operatorGroup'];
+        const joined = Object.assign({}, mainData, groupData);
+        console.log('Joined Data : ' + JSON.stringify(joined));
+        return joined;
+    }
+
+    saveService(): void {
+        if (this.serviceForm.dirty && this.serviceForm.valid) {
+            // Overwrite the service object values by the form values
+            const s = Object.assign({}, this.telecomService, this.formatValues());
+            // console.log(JSON.stringify(s));
+            this.service.save_service(s).subscribe(() => this.saveOnComplete(),
+                (error: any) => this.errorMessage = <any>error);
+        } else if (!this.serviceForm.dirty) {
+            this.saveOnComplete();
+        }
+        console.log('Saved: ' + JSON.stringify(this.serviceForm.value));
+    }
+
+    saveOnComplete(): void {
+        // Reset the form to clear the flags
+        this.serviceForm.reset();
+        this.router.navigate(['/services']);
         console.log('Saved: ' + JSON.stringify(this.serviceForm.value));
     }
 

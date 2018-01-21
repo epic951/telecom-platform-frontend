@@ -1,16 +1,8 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Add Service</div>
     <div class="panel-body">
-        <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="serviceForm">
+        <form class="form-horizontal" novalidate (ngSubmit)="saveService()" [formGroup]="serviceForm">
             <fieldset>
-                <div class="form-group" [ngClass]="{'has-error':telecomServiceIdMsg}">
-                    <label class="col-md-2 control-label" for="telecomServiceId">Service ID</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="telecomServiceId" type="text" placeholder="Service ID (required)" formControlName="telecomServiceId"
-                        />
-                        <span class="help-block" *ngIf="telecomServiceIdMsg">Service ID {{telecomServiceIdMsg}}</span>
-                    </div>
-                </div>
                 <div class="form-group" [ngClass]="{'has-error':telecomServiceNameMsg}">
                     <label class="col-md-2 control-label" for="telecomServiceName">Service Name</label>
                     <div class="col-md-8">
@@ -23,10 +15,10 @@
                     <label class="col-md-2 control-label">Description</label>
                     <div class="col-md-8">
                         <label class="radio-inline">
-                            <input type="radio" value="subscription" formControlName="telecomServiceType">Subscription
+                            <input type="radio" id="telecomServiceType" value=true formControlName="telecomServiceType">Subscription
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" value="alacarte" formControlName="telecomServiceType">Alacarte
+                            <input type="radio" id="telecomServiceType" value=false formControlName="telecomServiceType">Alacarte
                         </label>
                     </div>
                 </div>
