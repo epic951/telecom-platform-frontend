@@ -83,7 +83,7 @@ export class TelecomServiceComponent implements OnInit {
         this.serviceForm.get('imageUrl'), this.serviceForm.get('rating')];
         const messages = ['telecomServiceIdMsg', 'telecomServiceNameMsg', 'operatorIdMsg', 'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
-            controllers[i].valueChanges.debounceTime(1000).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
+            controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
     }
 

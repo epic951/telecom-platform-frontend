@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit {
         const messages = ['productIdMsg', 'productNameMsg', 'productDescriptionMsg',
             'minPriceMsg', 'maxPriceMsg', 'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
-            controllers[i].valueChanges.debounceTime(1000).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
+            controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
     }
 

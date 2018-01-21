@@ -44,7 +44,7 @@ export class OperatorComponent implements OnInit {
         const messages = ['operatorIdMsg', 'operatorNameMsg', 'operatorCountryMsg',
             'imageUrlMsg', 'ratingMsg'];
         for (let i = 0; i < controllers.length; i++) {
-            controllers[i].valueChanges.debounceTime(1000).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
+            controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
     }
 
