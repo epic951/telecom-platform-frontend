@@ -1,14 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Bitter|Exo+2');
-
+/* @import url('https://fonts.googleapis.com/css?family=Bitter|Exo+2'); */
+@import url('//fonts.googleapis.com/css?family=Bitter|Exo+2');
 html {
     box-sizing: border-box;
 }
-
 *, *:before, *:after {
     box-sizing: inherit;
 }
-
 body {
     width: 75%;
     margin: auto;
