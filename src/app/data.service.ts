@@ -59,7 +59,7 @@ export class DataService {
 
     save_operator(operator: IOperator): Observable<IOperator> {
         return this.httpClient.post(this.baseUrl + 'addoperator', operator, { headers: this.headers })
-            .do(data => console.log(JSON.stringify(data))).catch(this.handleErrors);
+            .do(data => console.log('data ' + JSON.stringify(data))).catch(this.handleErrors);
     }
 
     // telecomservice operations

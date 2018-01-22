@@ -53,11 +53,13 @@ export class ProductComponent implements OnInit {
         }
 
         const id = +this._route.snapshot.params['id'];
-        const temp = this.service.find_product(id)
-            .subscribe(response => {
-                this.template = response;
-                this.fillForm();
-            });
+        if (id !== null && id > 0) {
+            this.service.find_product(id)
+                .subscribe(response => {
+                    this.template = response;
+                    this.fillForm();
+                });
+        }
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {

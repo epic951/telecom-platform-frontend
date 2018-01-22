@@ -49,11 +49,13 @@ export class OperatorComponent implements OnInit {
         }
 
         const id = +this._route.snapshot.params['id'];
-        const temp = this.service.find_operator(id)
-            .subscribe(response => {
-                this.template = response;
-                this.fillForm();
-            });
+        if (id !== null && id > 0) {
+            this.service.find_operator(id)
+                .subscribe(response => {
+                    this.template = response;
+                    this.fillForm();
+                });
+        }
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
@@ -92,14 +94,14 @@ export class OperatorComponent implements OnInit {
         } else if (!this.operatorForm.dirty) {
             this.saveOnComplete();
         }
-        console.log('Saved: ' + JSON.stringify(this.operatorForm.value));
+        console.log('@Saved: ' + JSON.stringify(this.operatorForm.value));
     }
 
     saveOnComplete(): void {
         // Reset the form to clear the flags
         this.operatorForm.reset();
         this.router.navigate(['/operators']);
-        console.log('Saved: ' + JSON.stringify(this.operatorForm.value));
+        console.log('%Saved: ' + JSON.stringify(this.operatorForm.value));
     }
 
     onReset(): void {

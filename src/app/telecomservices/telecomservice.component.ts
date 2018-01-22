@@ -87,13 +87,16 @@ export class TelecomServiceComponent implements OnInit {
             controllers[i].valueChanges.debounceTime(700)
                 .subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
+
         // const id = +this._route.snapshot.paramMap.get('id');
         const id = +this._route.snapshot.params['id'];
-        const temp = this.service.find_telecomservice(id)
-            .subscribe(response => {
-                this.template = response;
-                this.fillForm();
-            });
+        if (id !== null && id > 0) {
+            this.service.find_telecomservice(id)
+                .subscribe(response => {
+                    this.template = response;
+                    this.fillForm();
+                });
+        }
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
@@ -123,26 +126,10 @@ export class TelecomServiceComponent implements OnInit {
         }
     }
 
-    formatValues(): string {
-        const json = JSON.stringify(this.serviceForm.value);
-        const mainData = JSON.parse(json, (key, value) => {
-            if (key === 'operatorGroup') {
-                key = undefined;
-                value = undefined;
-            }
-            return value;
-        });
-        const groupData = JSON.parse(json)['operatorGroup'];
-        const joined = Object.assign({}, mainData, groupData);
-        console.log('Joined Data : ' + JSON.stringify(joined));
-        return joined;
-    }
-
     saveService(): void {
         if (this.serviceForm.dirty && this.serviceForm.valid) {
             // Overwrite the service object values by the form values
             const s = Object.assign({}, this.telecomService, this.formatValues());
-            // console.log(JSON.stringify(s));
             this.service.save_service(s).subscribe(() => this.saveOnComplete(),
                 (error: any) => this.errorMessage = <any>error);
         } else if (!this.serviceForm.dirty) {
@@ -156,6 +143,23 @@ export class TelecomServiceComponent implements OnInit {
         this.serviceForm.reset();
         this.router.navigate(['/services']);
         console.log('Saved: ' + JSON.stringify(this.serviceForm.value));
+    }
+
+    formatValues(): string {
+        const json = JSON.stringify(this.serviceForm.value);
+        const mainData = JSON.parse(json, (key, value) => {
+            if (key === 'operatorGroup') {
+                key = undefined;
+                value = undefined;
+            } else if (key === 'imageUrl' && (value === '' || value === null)) {
+                value = 'https://openclipart.org/download/22436/nicubunu-Tools.svg';
+            }
+            return value;
+        });
+        const groupData = JSON.parse(json)['operatorGroup'];
+        const joined = Object.assign({}, mainData, groupData);
+        console.log('Joined Data : ' + JSON.stringify(joined));
+        return joined;
     }
 
     onReset(): void {
