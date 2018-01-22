@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { IProduct } from './product';
 import 'rxjs/add/operator/debounceTime';
@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
     maxPriceMsg: string;
     imageUrlMsg: string;
     ratingMsg: string;
+    template: IProduct;
 
     private validationMessages = {
         required: ' value is required.  ',
@@ -29,12 +30,12 @@ export class ProductComponent implements OnInit {
         max: ' cannot be higher than 9999.  '
     };
 
-    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
+    constructor(private builder: FormBuilder, private router: Router, private _route: ActivatedRoute, private service: DataService) { }
 
     ngOnInit(): void {
         this.productForm = this.builder.group({
             productName: ['', [Validators.required, Validators.required, Validators.minLength(3),
-            Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
+            Validators.maxLength(30), Validators.pattern('[a-zA-Z\\s]+')]],
             productDescription: ['', Validators.maxLength(35)],
             minPrice: ['', [Validators.min(1), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
             maxPrice: ['', [Validators.max(9999), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
@@ -50,16 +51,16 @@ export class ProductComponent implements OnInit {
         for (let i = 0; i < controllers.length; i++) {
             controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
+
+        const id = +this._route.snapshot.params['id'];
+        const temp = this.service.find_product(id)
+            .subscribe(response => {
+                this.template = response;
+                this.fillForm();
+            });
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
-        // if (msg === 'productIdMsg') {
-        //     this.productIdMsg = '';
-        //     if ((c.touched || c.dirty) && c.errors) {
-        //         console.log('@@');
-        //         this.productIdMsg = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
-        //     }
-        // }
         if (msg === 'productNameMsg') {
             this.productNameMsg = '';
             if ((c.touched || c.dirty) && c.errors) {
@@ -115,6 +116,24 @@ export class ProductComponent implements OnInit {
         this.productForm.reset();
         this.router.navigate(['/products']);
         console.log(this.errorMessage);
+    }
+
+    onReset(): void {
+        this.productForm.reset();
+    }
+
+    fillForm(): void {
+        const temp = +this._route.snapshot.params['id'];
+        console.log(this.template.productName + ' --' + temp + '!!' + this.productForm.get('productName').value);
+        if (temp !== null && temp > 0) {
+            this.productForm.get('productId').setValue(this.template.productId);
+            this.productForm.get('productName').setValue(this.template.productName);
+            this.productForm.get('productDescription').setValue(this.template.productDescription);
+            this.productForm.get('minPrice').setValue(this.template.minPrice);
+            this.productForm.get('maxPrice').setValue(this.template.maxPrice);
+            this.productForm.get('imageUrl').setValue(this.template.imageUrl);
+            this.productForm.get('rating').setValue(this.template.rating);
+        }
     }
 
 }

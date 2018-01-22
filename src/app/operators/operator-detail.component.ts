@@ -25,4 +25,8 @@ export class OperatorDetailComponent implements OnInit {
     onBack(): void {
         this._router.navigate(['/operators']);
     }
+
+    onEdit(): void {
+        this._router.navigate(['/addoperator', this.operator.operatorId]);
+    }
 }

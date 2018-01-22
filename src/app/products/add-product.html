@@ -3,14 +3,6 @@
     <div class="panel-body">
         <form class="form-horizontal" novalidate (ngSubmit)="saveProduct()" [formGroup]="productForm">
             <fieldset>
-                <!-- <div class="form-group" [ngClass]="{'has-error':productIdMsg}">
-                    <label class="col-md-2 control-label" for="productId">ID</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="productId" type="text" placeholder="Product ID (required)" formControlName="productId" value="0"
-                            hidden />
-                        <span class="help-block" *ngIf="productIdMsg">Product ID {{productIdMsg}}</span>
-                    </div>
-                </div> -->
                 <div class="form-group" [ngClass]="{'has-error':productNameMsg}">
                     <label class="col-md-2 control-label" for="productName">Name</label>
                     <div class="col-md-8">
@@ -55,11 +47,18 @@
                         <span class="help-block" *ngIf="ratingMsg">Rating {{ratingMsg}}</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-2">
+                <div class=" btn-group">
+                    <div class="col-xs-4">
                         <span>
                             <button class="btn btn-primary" type="submit" [disabled]="!productForm.valid">
                                 Save
+                            </button>
+                        </span>
+                    </div>
+                    <div class="col-xs-4">
+                        <span>
+                            <button class="btn btn-danger" type="reset" (click)='onReset()'>
+                                Reset
                             </button>
                         </span>
                     </div>

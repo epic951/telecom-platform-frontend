@@ -45,6 +45,9 @@ import { OperatorComponent } from './operators/operator.component';
       { path: 'add-product', component: ProductComponent },
       { path: 'add-service', component: TelecomServiceComponent },
       { path: 'add-operator', component: OperatorComponent },
+      { path: 'addservice/:id', component: TelecomServiceComponent },
+      { path: 'addproduct/:id', component: ProductComponent },
+      { path: 'addoperator/:id', component: OperatorComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }])

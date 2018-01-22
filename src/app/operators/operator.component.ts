@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { IOperator } from './operator';
 import 'rxjs/add/operator/debounceTime';
@@ -17,6 +17,7 @@ export class OperatorComponent implements OnInit {
     operatorCountryMsg: string;
     imageUrlMsg: string;
     ratingMsg: string;
+    template: IOperator;
 
     private validationMessages = {
         required: ' value is required.  ',
@@ -28,13 +29,12 @@ export class OperatorComponent implements OnInit {
     };
 
 
-    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
+    constructor(private builder: FormBuilder, private router: Router, private _route: ActivatedRoute, private service: DataService) { }
 
     ngOnInit(): void {
         this.operatorForm = this.builder.group({
-            operatorId: ['0'],
             operatorName: ['', [Validators.required, Validators.minLength(3),
-            Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
+            Validators.maxLength(30), Validators.pattern('[a-zA-Z\\s]+')]],
             operatorCountry: ['', [Validators.maxLength(35), Validators.pattern('[a-zA-Z]+')]],
             imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
@@ -47,6 +47,13 @@ export class OperatorComponent implements OnInit {
         for (let i = 0; i < controllers.length; i++) {
             controllers[i].valueChanges.debounceTime(700).subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
+
+        const id = +this._route.snapshot.params['id'];
+        const temp = this.service.find_operator(id)
+            .subscribe(response => {
+                this.template = response;
+                this.fillForm();
+            });
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
@@ -93,6 +100,21 @@ export class OperatorComponent implements OnInit {
         this.operatorForm.reset();
         this.router.navigate(['/operators']);
         console.log('Saved: ' + JSON.stringify(this.operatorForm.value));
+    }
+
+    onReset(): void {
+        this.operatorForm.reset();
+    }
+
+    fillForm(): void {
+        const temp = +this._route.snapshot.params['id'];
+        if (temp !== null && temp > 0) {
+            this.operatorForm.get('operatorId').setValue(this.template.operatorId);
+            this.operatorForm.get('operatorName').setValue(this.template.operatorName);
+            this.operatorForm.get('operatorCountry').setValue(this.template.operatorCountry);
+            this.operatorForm.get('imageUrl').setValue(this.template.imageUrl);
+            this.operatorForm.get('rating').setValue(this.template.rating);
+        }
     }
 
 }

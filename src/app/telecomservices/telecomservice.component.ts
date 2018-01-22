@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { ITelecomService } from './telecomservice';
 import 'rxjs/add/operator/debounceTime';
@@ -51,6 +51,7 @@ export class TelecomServiceComponent implements OnInit {
     operatorIdMsg: string;
     imageUrlMsg: string;
     ratingMsg: string;
+    template: ITelecomService;
 
     private validationMessages = {
         required: ' value is required.  ',
@@ -61,13 +62,12 @@ export class TelecomServiceComponent implements OnInit {
         max: ' cannot be higher than 5.  '
     };
 
-    constructor(private builder: FormBuilder, private router: Router, private service: DataService) { }
+    constructor(private builder: FormBuilder, private router: Router, private _route: ActivatedRoute, private service: DataService) { }
 
     ngOnInit(): void {
         this.serviceForm = this.builder.group({
-            telecomServiceId: ['0'],
-            telecomServiceName: ['', [Validators.required, Validators.minLength(3),
-            Validators.maxLength(30), Validators.pattern('[a-zA-Z]+')]],
+            telecomServiceId: [''], telecomServiceName: ['', [Validators.required, Validators.minLength(3),
+            Validators.maxLength(30), Validators.pattern('[a-zA-Z\\s]+')]],
             telecomServiceType: 'false',
             operatorId: ['', [Validators.required, Validators.min(1), Validators.pattern('[0-9]+')]],
             operatorGroup: this.builder.group({
@@ -87,6 +87,13 @@ export class TelecomServiceComponent implements OnInit {
             controllers[i].valueChanges.debounceTime(700)
                 .subscribe(value => this.setValidationMessage(controllers[i], messages[i]));
         }
+        // const id = +this._route.snapshot.paramMap.get('id');
+        const id = +this._route.snapshot.params['id'];
+        const temp = this.service.find_telecomservice(id)
+            .subscribe(response => {
+                this.template = response;
+                this.fillForm();
+            });
     }
 
     setValidationMessage(c: AbstractControl, msg: string): void {
@@ -149,6 +156,25 @@ export class TelecomServiceComponent implements OnInit {
         this.serviceForm.reset();
         this.router.navigate(['/services']);
         console.log('Saved: ' + JSON.stringify(this.serviceForm.value));
+    }
+
+    onReset(): void {
+        this.serviceForm.reset();
+    }
+
+    fillForm(): void {
+        const temp = +this._route.snapshot.params['id'];
+        if (temp !== null && temp > 0) {
+            this.serviceForm.get('telecomServiceId').setValue(this.template.telecomServiceId);
+            this.serviceForm.get('telecomServiceName').setValue(this.template.telecomServiceName);
+            this.serviceForm.get('telecomServiceType').setValue(this.template.telecomServiceType ? 'true' : 'false');
+            this.serviceForm.get('operatorId').setValue(this.template.operatorId);
+            this.serviceForm.get('operatorGroup.operatorName').setValue(this.template.operatorName);
+            this.serviceForm.get('operatorGroup.operatorServiceId').setValue(this.template.operatorServiceId);
+            this.serviceForm.get('operatorGroup.operatorPackageId').setValue(this.template.operatorPackageId);
+            this.serviceForm.get('imageUrl').setValue(this.template.imageUrl);
+            this.serviceForm.get('rating').setValue(this.template.rating);
+        }
     }
 
 }
