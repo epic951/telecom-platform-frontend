@@ -88,6 +88,9 @@ export class OperatorComponent implements OnInit {
     saveOperator(): void {
         if (this.operatorForm.dirty && this.operatorForm.valid) {
             // Overwrite the operator object values by the form values
+            if (this.operatorForm.get('imageUrl').value === null || this.operatorForm.get('imageUrl').value === '') {
+                this.operatorForm.patchValue({ 'imageUrl': 'https://openclipart.org/download/22436/nicubunu-Tools.svg' });
+            }
             const o = Object.assign({}, this.operator, this.operatorForm.value);
             this.service.save_operator(o).subscribe(() => this.saveOnComplete(),
                 (error: any) => this.errorMessage = <any>error);

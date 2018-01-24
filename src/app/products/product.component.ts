@@ -103,6 +103,9 @@ export class ProductComponent implements OnInit {
 
     saveProduct(): void {
         if (this.productForm.dirty && this.productForm.valid) {
+            if (this.productForm.get('imageUrl').value === null || this.productForm.get('imageUrl').value === '') {
+                this.productForm.patchValue({ 'imageUrl': 'https://openclipart.org/download/85345/home-sim-card.svg' });
+            }
             // Overwrite the product object values by the form values
             const p = Object.assign({}, this.product, this.productForm.value);
             this.service.save_product(p).subscribe(() => this.saveOnComplete(),

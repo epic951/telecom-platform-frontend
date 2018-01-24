@@ -20,7 +20,7 @@ export class OperatorListComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit(): void {
-        this.operatorsObservable = this.dataService.get_operators().delay(250);
+        this.operatorsObservable = this.dataService.get_operators().delay(500);
     }
 
     onRatingClicked(message: string): void {

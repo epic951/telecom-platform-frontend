@@ -129,6 +129,9 @@ export class TelecomServiceComponent implements OnInit {
 
     saveService(): void {
         if (this.serviceForm.dirty && this.serviceForm.valid) {
+            if (this.serviceForm.get('imageUrl').value === null || this.serviceForm.get('imageUrl').value === '') {
+                this.serviceForm.patchValue({ 'imageUrl': 'https://openclipart.org/download/294225/FX13_phone1.svg' });
+            }
             // Overwrite the service object values by the form values
             const s = Object.assign({}, this.telecomService, this.formatValues());
             this.service.save_service(s).subscribe(() => this.saveOnComplete(),
