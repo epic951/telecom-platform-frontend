@@ -25,8 +25,10 @@ function operatorIntegrityEnforcer(c: AbstractControl): { [key: string]: boolean
         }
     }
     if (temp.toLowerCase().indexOf('vodafone') !== -1) {
-        if (opSID.value === null || opSID.value === '' || opPID.value === null || opPID.value === '') {
+        if (opSID.value === null || opSID.value === '') {
             opSID.setErrors({ 'required': true });
+        }
+        if (opPID.value === null || opPID.value === '') {
             opPID.setErrors({ 'required': true });
         }
     }
@@ -77,7 +79,7 @@ export class TelecomServiceComponent implements OnInit {
                 operatorServiceId: ['', [Validators.min(1), Validators.pattern('[0-9]+')]],
                 operatorPackageId: ['', [Validators.min(1), Validators.pattern('[0-9]+')]]
             }, { validator: operatorIntegrityEnforcer }),
-            imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
+            imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-_/]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
         });
 
@@ -155,8 +157,6 @@ export class TelecomServiceComponent implements OnInit {
             if (key === 'operatorGroup') {
                 key = undefined;
                 value = undefined;
-            } else if (key === 'imageUrl' && (value === '' || value === null)) {
-                value = 'https://openclipart.org/download/22436/nicubunu-Tools.svg';
             }
             return value;
         });
