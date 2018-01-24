@@ -33,7 +33,7 @@ export class OperatorComponent implements OnInit {
 
     ngOnInit(): void {
         this.operatorForm = this.builder.group({
-            operatorName: ['', [Validators.required, Validators.minLength(3),
+            operatorId: [''], operatorName: ['', [Validators.required, Validators.minLength(3),
             Validators.maxLength(30), Validators.pattern('[a-zA-Z\\s]+')]],
             operatorCountry: ['', [Validators.maxLength(35), Validators.pattern('[a-zA-Z]+')]],
             imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
