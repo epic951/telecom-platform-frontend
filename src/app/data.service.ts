@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { IProduct } from './products/product';
 import { IOperator } from './operators/operator';
 import { ITelecomService } from './telecomservices/telecomservice';
@@ -20,7 +20,8 @@ export class DataService {
     credentials = btoa(this.username + ':' + this.password);
 
     // Setup Http Headers
-    headers: HttpHeaders = new HttpHeaders().set('Authorization', 'Basic ' + this.credentials).set('Content-Type', 'application/json');
+    headers: HttpHeaders = new HttpHeaders().set('Authorization', 'Basic ' + this.credentials)
+        .set('Content-Type', 'application/json');
 
     constructor(private httpClient: HttpClient) { }
 
@@ -46,6 +47,13 @@ export class DataService {
             .do(data => console.log(JSON.stringify(data))).catch(this.handleErrors);
     }
 
+    delete_product(product: IProduct) {
+        const request = new HttpRequest('DELETE', this.baseUrl + 'deleteproduct');
+        return this.httpClient.request(request.clone({
+            headers: this.headers, body: JSON.stringify(product)
+        })).subscribe(data => console.log('success', data), error => this.handleErrors);
+    }
+
     // operator operations
     get_operators(): Observable<IOperator[]> {
         return this.httpClient.get<IOperator[]>(this.baseUrl + 'getoperators', { headers: this.headers })
@@ -62,6 +70,13 @@ export class DataService {
             .do(data => console.log('data ' + JSON.stringify(data))).catch(this.handleErrors);
     }
 
+    delete_operator(operator: IOperator) {
+        const request = new HttpRequest('DELETE', this.baseUrl + 'deleteoperator');
+        return this.httpClient.request(request.clone({
+            headers: this.headers, body: JSON.stringify(operator)
+        })).subscribe(data => console.log('success', data), error => this.handleErrors);
+    }
+
     // telecomservice operations
     get_telecomservices(): Observable<ITelecomService[]> {
         return this.httpClient.get<ITelecomService[]>(this.baseUrl + 'getservices', { headers: this.headers })
@@ -76,6 +91,13 @@ export class DataService {
     save_service(service: ITelecomService): Observable<ITelecomService> {
         return this.httpClient.post(this.baseUrl + 'addservice', service, { headers: this.headers })
             .do(data => console.log(JSON.stringify(data))).catch(this.handleErrors);
+    }
+
+    delete_service(service: ITelecomService) {
+        const request = new HttpRequest('DELETE', this.baseUrl + 'deleteservice');
+        return this.httpClient.request(request.clone({
+            headers: this.headers, body: JSON.stringify(service)
+        })).subscribe(data => console.log('success', data), error => this.handleErrors);
     }
 
     // error handling

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IOperator } from './operator';
 import { DataService } from '../data.service';
+import 'rxjs/add/operator/delay';
 
 @Component({
     selector: 'app-operators',
@@ -19,7 +20,7 @@ export class OperatorListComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit(): void {
-        this.operatorsObservable = this.dataService.get_operators();
+        this.operatorsObservable = this.dataService.get_operators().delay(250);
     }
 
     onRatingClicked(message: string): void {

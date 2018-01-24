@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IProduct } from './product';
 import { DataService } from '../data.service';
+import 'rxjs/add/operator/delay';
 
 @Component({
     selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductListComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit(): void {
-        this.productsObservable = this.dataService.get_products();
+        this.productsObservable = this.dataService.get_products().delay(250);
     }
 
     onRatingClicked(message: string): void {
