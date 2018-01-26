@@ -1,6 +1,6 @@
 {
   "name": "telecom-platform",
-  "version": "0.0.0",
+  "version": "0.6.8",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

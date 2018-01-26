@@ -28,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
     }
 
     onEdit(): void {
-        this._router.navigate(['/addproduct', this.product.productId]);
+        this._router.navigate(['/add-product', this.product.productId]);
     }
 
     onDelete(): void {

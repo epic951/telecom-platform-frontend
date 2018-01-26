@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit(): void {
-        this.productsObservable = this.dataService.get_products().delay(250);
+        this.productsObservable = this.dataService.get_products().delay(500);
     }
 
     onRatingClicked(message: string): void {

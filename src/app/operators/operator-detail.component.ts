@@ -27,7 +27,7 @@ export class OperatorDetailComponent implements OnInit {
     }
 
     onEdit(): void {
-        this._router.navigate(['/addoperator', this.operator.operatorId]);
+        this._router.navigate(['/add-operator', this.operator.operatorId]);
     }
 
     onDelete(): void {

@@ -37,8 +37,8 @@ export class ProductComponent implements OnInit {
             productId: [''], productName: ['', [Validators.required, Validators.required, Validators.minLength(3),
             Validators.maxLength(30), Validators.pattern('[a-zA-Z\\s]+')]],
             productDescription: ['', Validators.maxLength(35)],
-            minPrice: ['', [Validators.min(1), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
-            maxPrice: ['', [Validators.max(9999), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
+            minPrice: ['', [Validators.min(1), Validators.max(9999), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
+            maxPrice: ['', [Validators.min(1), Validators.max(9999), Validators.pattern('[0-9]*[.]{0,1}[0-9]*')]],
             imageUrl: ['', [Validators.pattern('^((https?|ftp)://)?([A-Za-z]+\\.)?[A-Za-z0-9-_/]+(\\.[a-zA-Z]{1,4}){1,2}(/.*\\?.*)?$')]],
             rating: ['', [Validators.min(1), Validators.max(5), Validators.pattern('[0-9]+[.]{0,1}[0-9]*')]]
         });

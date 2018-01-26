@@ -28,7 +28,7 @@ export class TelecomServiceDetailComponent implements OnInit {
     }
 
     onEdit(): void {
-        this._router.navigate(['/addservice', this.service.telecomServiceId]);
+        this._router.navigate(['/add-service', this.service.telecomServiceId]);
     }
 
     onDelete(): void {

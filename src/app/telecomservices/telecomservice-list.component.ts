@@ -20,7 +20,7 @@ export class TelecomServiceListComponent implements OnInit {
     constructor(private dataService: DataService) { }
 
     ngOnInit(): void {
-        this.telecomservicesObservable = this.dataService.get_telecomservices().delay(250);
+        this.telecomservicesObservable = this.dataService.get_telecomservices().delay(500);
     }
 
     onRatingClicked(message: string): void {

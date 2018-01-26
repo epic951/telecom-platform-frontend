@@ -90,7 +90,7 @@ export class DataService {
 
     save_service(service: ITelecomService): Observable<ITelecomService> {
         return this.httpClient.post(this.baseUrl + 'addservice', service, { headers: this.headers })
-            .do(data => console.log(JSON.stringify(data))).catch(this.handleErrors);
+            .do((res) => console.log('XXXXX ' + JSON.stringify(res))).catch(this.handleErrors);
     }
 
     delete_service(service: ITelecomService) {

@@ -136,6 +136,7 @@ export class TelecomServiceComponent implements OnInit {
             }
             // Overwrite the service object values by the form values
             const s = Object.assign({}, this.telecomService, this.formatValues());
+            console.log('Assigned Data : ' + JSON.stringify(s));
             this.service.save_service(s).subscribe(() => this.saveOnComplete(),
                 (error: any) => this.errorMessage = <any>error);
         } else if (!this.serviceForm.dirty) {
@@ -148,11 +149,11 @@ export class TelecomServiceComponent implements OnInit {
         // Reset the form to clear the flags
         this.serviceForm.reset();
         this.router.navigate(['/services']);
-        console.log('Saved: ' + JSON.stringify(this.serviceForm.value));
     }
 
     formatValues(): string {
         const json = JSON.stringify(this.serviceForm.value);
+        console.log('Form Data : ' + JSON.stringify(json));
         const mainData = JSON.parse(json, (key, value) => {
             if (key === 'operatorGroup') {
                 key = undefined;
@@ -160,7 +161,9 @@ export class TelecomServiceComponent implements OnInit {
             }
             return value;
         });
+        console.log('Main Data : ' + JSON.stringify(mainData));
         const groupData = JSON.parse(json)['operatorGroup'];
+        console.log('Group Data : ' + JSON.stringify(groupData));
         const joined = Object.assign({}, mainData, groupData);
         console.log('Joined Data : ' + JSON.stringify(joined));
         return joined;
